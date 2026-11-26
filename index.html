@@ -310,6 +310,62 @@ body{background:#f5f7fb}
 @media(max-width:1000px){
  .standings-container.is-expanded .chart-panel{margin-top:0!important}
 }
+
+/* v11: provisional presentation: halt only the stick-figure throw/swing animations. */
+.vs-motion .athlete-arm,.vs-motion.batter .athlete-arm,
+.vs-motion .flying-ball,.vs-motion.batter .flying-ball{animation:none!important;transform:none!important}
+/* Clear centered strike-zone boundary; outer 16 cells read as context. */
+.vs-cool-plot{position:relative;width:min(100%,228px);aspect-ratio:1}
+.vs-cool-plot .vs-cool-grid{width:100%;height:100%;gap:3px}
+.vs-cool-plot .vs-cool-cell{font-variant-numeric:tabular-nums;font-size:10px;min-width:0;border-radius:3px}
+.vs-cool-plot .outer-cell{opacity:.68}
+.vs-cool-plot .strike-cell{font-weight:900}
+.vs-strike-outline{position:absolute;pointer-events:none;left:20%;top:20%;width:60%;height:60%;border:2px solid #132f50;border-radius:3px;box-shadow:0 0 0 1px #ffffff90}
+.vs-zone-label span{font-size:10px;font-weight:500;color:#7a8fa1}
+.vs-zone-disclaimer{line-height:1.4}
+@media(max-width:640px){.vs-cool-plot{width:min(100%,205px)}}
+
+/* Team VS Team: compact mirrored bars, metric meaning on hover/focus/tap */
+.vs-dual-row{grid-template-columns:minmax(0,1fr) 116px minmax(0,1fr);gap:8px;position:relative;align-items:center;min-height:50px}
+.vs-side{display:flex;align-items:center;gap:8px;min-width:0}
+.vs-side.reverse{flex-direction:row-reverse}
+.vs-metric-person{flex:0 1 88px;min-width:0;font-size:11px;font-weight:650;color:#5c6d7e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vs-metric-value{flex:0 0 auto;font-size:13px;font-variant-numeric:tabular-nums;color:#172d4a}
+.vs-metric-track{min-width:18px;flex:1;height:12px;display:flex;align-items:stretch;border-radius:4px;background:#ecf0f5;overflow:hidden;justify-content:flex-end}
+.vs-side.reverse .vs-metric-track{justify-content:flex-start}
+.vs-metric-fill{display:block;height:100%;background:var(--team);border-radius:3px}
+.vs-metric-info{min-width:0;position:relative;border:0;background:transparent;padding:6px 3px;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:help;color:#203b5e}
+.vs-metric-info strong{font-size:12px}
+.vs-metric-direction{font-size:9px;font-weight:600;color:#8b99a8;white-space:nowrap}
+.vs-metric-tooltip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);z-index:12;display:none;min-width:max-content;max-width:min(80vw,260px);background:#132b4a;color:white;border-radius:7px;padding:8px 10px;font-size:12px;font-weight:500;line-height:1.3;box-shadow:0 5px 16px #162a4833;pointer-events:none}
+.vs-metric-info:hover .vs-metric-tooltip,.vs-metric-info:focus-visible .vs-metric-tooltip,.vs-metric-info.open .vs-metric-tooltip{display:block}
+@media(max-width:650px){
+ .vs-dual-row{grid-template-columns:minmax(0,1fr) 88px minmax(0,1fr);gap:4px}
+ .vs-side{gap:3px;flex-wrap:wrap}
+ .vs-metric-person{flex:0 0 100%;font-size:9px}
+ .vs-side.reverse .vs-metric-person{text-align:right}
+ .vs-metric-value{font-size:11px}
+ .vs-metric-track{height:10px}
+ .vs-metric-info strong{font-size:10px}
+ .vs-metric-direction{font-size:8px}
+}
+
+/* Search as a learning card: definition -> reading cue -> exact source navigation */
+.global-term-results{max-height:min(74vh,640px);padding:12px}
+.global-guide-card{border-top:1px solid #edf1f5;padding:13px 5px 12px;display:flex;flex-direction:column;gap:7px}
+.global-guide-head{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--navy)}
+.global-guide-head b{font-size:17px;letter-spacing:-.35px}
+.global-guide-type{color:#718398;font-size:11px;font-weight:700;background:#f0f4f8;border-radius:8px;padding:3px 8px}
+.global-guide-meaning{font-size:13px;font-weight:750;line-height:1.5;color:#183352;margin:0}
+.global-guide-direction{font-size:11px;color:#2e678a;font-weight:750}
+.global-guide-example{background:#f5f8fb;border-radius:8px;padding:9px 10px;color:#53677f;font-size:12px;line-height:1.45}
+.global-guide-footer{display:flex;align-items:center;justify-content:space-between;gap:9px;padding-top:2px}
+.global-guide-footer>span{color:#8090a1;font-size:10px}
+.global-guide-footer .global-jump{margin-top:0;white-space:nowrap}
+.glossary-target-active{outline:3px solid #e5a43a!important;outline-offset:3px;box-shadow:0 0 0 7px rgba(229,164,58,.13)!important;border-radius:10px;transition:box-shadow .2s}
+[data-vs-metric]{scroll-margin-top:140px}
+[data-metric]{scroll-margin-top:140px}
+@media(max-width:650px){.global-guide-head b{font-size:15px}.global-guide-footer>span{font-size:10px}.global-guide-footer .global-jump{font-size:10px;padding:6px 8px}}
 </style>
 </head>
 <body>
@@ -377,8 +433,44 @@ const EXTRA_BASEBALL_TERMS=[
  ['세이브','특정 조건에서 팀의 리드를 지키고 경기를 마무리한 투수의 기록.'],
  ['홀드','특정 조건에서 리드를 지키고 교체된 구원 투수에게 주는 기록.']
 ];
-const SEARCH_TERMS=[...BASEBALL_TERMS,...EXTRA_BASEBALL_TERMS];
+const SITE_ADDITIONAL_TERMS=[
+ ['병살','한 플레이에서 공격팀 주자 2명이 아웃되는 기록.'],
+ ['도루','안타 등 타격 결과 없이 주자가 다음 베이스로 진루하는 기록.'],
+ ['타수','타율 계산의 분모가 되는 공식 타격 기회 수.'],
+ ['스위퍼','좌우 움직임이 큰 슬라이더 계열 구종.']
+];
+const SEARCH_TERMS=[...BASEBALL_TERMS,...EXTRA_BASEBALL_TERMS,...SITE_ADDITIONAL_TERMS];
 const TERM_DIRECTION={타율:'높을수록 좋음 ↑',출루율:'높을수록 좋음 ↑',장타율:'높을수록 좋음 ↑',OPS:'높을수록 좋음 ↑',평균자책점:'낮을수록 좋음 ↓',WHIP:'낮을수록 좋음 ↓',탈삼진:'많을수록 좋음 ↑',홈런:'많을수록 좋음 ↑',타점:'많을수록 좋음 ↑',실책:'적을수록 좋음 ↓',수비율:'높을수록 좋음 ↑',안타:'많을수록 좋음 ↑',볼넷:'타자에게 유리 ↑',승률:'높을수록 좋음 ↑',득점:'많을수록 좋음 ↑',실점:'적을수록 좋음 ↓',피안타:'적을수록 좋음 ↓',피홈런:'적을수록 좋음 ↓','볼넷 허용':'적을수록 좋음 ↓',구속:'상황에 따라 다름',비거리:'상황에 따라 다름','타구 속도':'상황에 따라 다름',발사각:'적정 각도는 상황마다 다름',이닝:'역할에 따라 다름',삼진:'타자 불리 · 투수 유리'};
+const TERM_GUIDE={
+ 'OPS':{type:'타자 기록',definition:'출루율 + 장타율',example:'OPS .800 = 출루율과 장타율의 합이 .800',target:'팀 VS 팀 · 타자',role:'hitter',metric:'ops'},
+ '타율':{type:'타자 기록',definition:'안타 ÷ 타수',example:'타율 .300 = 10타수당 평균 3안타',target:'팀 VS 팀 · 타자',role:'hitter',metric:'avg'},
+ '안타':{type:'타자 기록',definition:'타자가 타구로 출루한 기록',example:'안타 10개 = 안타로 기록된 타격 10회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'hits'},
+ '홈런':{type:'타자 기록',definition:'타자가 홈까지 득점하는 타구',example:'홈런 20개 = 홈런 20회 기록',target:'팀 VS 팀 · 타자',role:'hitter',metric:'hr'},
+ '볼넷':{type:'타자 기록 · 규칙',definition:'볼 4개 누적 시 타자 1루 진루',example:'볼넷 5개 = 볼넷을 통한 출루 5회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'bb'},
+ '실책':{type:'수비 기록',definition:'정상적인 수비를 수행하지 못한 오류',example:'실책 3개 = 공식적으로 기록된 수비 실책 3회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'errors'},
+ '병살':{type:'수비 기록',definition:'한 플레이에서 공격팀 주자 2명 아웃',example:'병살 2회 = 한 플레이에서 2명씩 아웃된 상황 2회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'dp'},
+ '도루':{type:'주루 기록',definition:'타격 없이 주자가 다음 베이스로 진루',example:'도루 10개 = 성공한 도루 10회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'stolen'},
+ '삼진':{type:'타자 기록',definition:'스트라이크 3개에 따른 타자 아웃',example:'삼진 2개 = 삼진으로 물러난 타석 2회',target:'팀 VS 팀 · 타자',role:'hitter',metric:'so'},
+ 'WHIP':{type:'투수 기록',definition:'(볼넷 + 피안타) ÷ 투구 이닝',example:'WHIP 1.20 = 1이닝당 안타·볼넷 합계 평균 1.20개',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'whip'},
+ '평균자책점':{type:'투수 기록',definition:'자책점 × 9 ÷ 투구 이닝',example:'평균자책점 3.00 = 9이닝당 자책점 평균 3점',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'era'},
+ '탈삼진':{type:'투수 기록',definition:'삼진으로 잡아낸 타자 수',example:'탈삼진 10개 = 삼진으로 잡은 타자 10명',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'k'},
+ '피안타':{type:'투수 기록',definition:'투수가 상대 타자에게 허용한 안타',example:'피안타 6개 = 허용한 안타 6개',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'ha'},
+ '피홈런':{type:'투수 기록',definition:'투수가 허용한 홈런',example:'피홈런 2개 = 허용한 홈런 2개',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'hra'},
+ '볼넷 허용':{type:'투수 기록',definition:'투수가 상대 타자에게 허용한 볼넷',example:'볼넷 허용 3개 = 볼넷으로 출루시킨 타자 3명',target:'팀 VS 팀 · 투수',role:'pitcher',metric:'bba'},
+ '승률':{type:'팀 기록',definition:'승 ÷ (승 + 패)',example:'승률 .600 = 무승부를 제외한 승패 경기 중 60% 승리',target:'시즌 순위 · 팀 핵심 기록',role:'season',metric:'wpct'},
+ '득점':{type:'팀 기록',definition:'공격으로 얻은 점수',example:'득점 5점 = 팀이 기록한 점수 5점',target:'시즌 순위 · 팀 핵심 기록',role:'season',metric:'runs'},
+ '실점':{type:'팀 기록',definition:'상대 팀에 허용한 점수',example:'실점 3점 = 상대에게 내준 점수 3점',target:'시즌 순위 · 팀 핵심 기록',role:'season',metric:'allowed'},
+ '구종':{type:'투구 용어',definition:'투수가 던지는 공의 종류',example:'직구·커브·슬라이더·스위퍼·체인지업',target:'팀 VS 팀 · 투수 TOP 3',role:'pitch-type'},
+ '출루율':{type:'타자 기록',definition:'타석에서 출루한 비율',example:'출루율 .400 = 출루율 40%',target:'선수 검색 · 상세 기록',role:'player',metric:'obp'},
+ '장타율':{type:'타자 기록',definition:'총루타 ÷ 타수',example:'장타율 .500 = 타수당 총루타 평균 0.5',target:'선수 검색 · 상세 기록',role:'player'},
+ '타점':{type:'타자 기록',definition:'타격 등으로 팀 득점에 기여한 기록',example:'타점 2개 = 타점으로 인정된 득점 2점',target:'선수 검색 · 상세 기록',role:'player',metric:'rbi'},
+ '이닝':{type:'경기 기록',definition:'공격 또는 수비 차례',example:'투구 이닝 6 = 투수가 아웃카운트 18개 기록',target:'선수 검색 · 투수 상세',role:'player',metric:'innings'},
+ '세이브':{type:'투수 기록',definition:'정해진 조건에서 팀의 리드를 지켜 종료한 기록',example:'세이브 1개 = 요건을 충족한 세이브 1회',target:'선수 검색 · 투수 상세',role:'player',metric:'saves'}
+};
+function termGuide(name,raw){
+ const guide=TERM_GUIDE[name]||{};
+ return {type:guide.type||'야구 용어',meaning:guide.definition||raw.replace(/\\. .*$/,'').replace(/\\.$/,'').trim(),example:guide.example||'',target:guide.target||'GAME · 용어 찾기',role:guide.role||'rules',metric:guide.metric||''};
+}
 function initGlobalGlossary(){
  const inp=document.getElementById('globalTermInput'),panel=document.getElementById('globalTermResults');
  if(!inp||!panel)return;
@@ -387,11 +479,19 @@ function initGlobalGlossary(){
  function update(){
   const query=inp.value.trim().toLocaleLowerCase('ko-KR');
   const found=SEARCH_TERMS.filter(([name,desc])=>!query||(`${name} ${desc}`).toLocaleLowerCase('ko-KR').includes(query));
-  const matches=(query?found:SEARCH_TERMS.filter(([n])=>['OPS','WHIP','타율','평균자책점','볼넷','탈삼진'].includes(n))).slice(0,8);
+  const matches=(query?found:SEARCH_TERMS.filter(([n])=>['OPS','WHIP','타율','평균자책점','볼넷','탈삼진'].includes(n))).slice(0,12);
   panel.hidden=!active;
   inp.setAttribute('aria-expanded',String(active));
   if(!active)return;
-  panel.innerHTML=matches.length?`<div class="global-result-label">${query?'검색 결과':'자주 찾는 용어'}</div>${matches.map(([name,desc])=>`<div class="global-result-item"><div class="global-result-heading"><b>${esc(name)}</b>${TERM_DIRECTION[name]?`<span class="global-result-direction">${esc(TERM_DIRECTION[name])}</span>`:''}</div><div class="global-result-desc">${esc(desc)}</div><button class="global-jump" type="button" data-term-jump="${esc(name)}">사이트에서 보기</button></div>`).join('')}`:'<div class="global-empty">일치하는 용어가 없어. 다른 단어로 검색해 봐.</div>';
+  panel.innerHTML=matches.length?`<div class="global-result-label">${query?'검색 결과':'자주 찾는 용어'} · ${matches.length}개</div>${matches.map(([name,desc])=>{
+   const guide=termGuide(name,desc),arrow=TERM_DIRECTION[name]||'';
+   return `<article class="global-guide-card"><div class="global-guide-head"><b>${esc(name)}</b><span class="global-guide-type">${esc(guide.type)}</span></div>
+    <p class="global-guide-meaning">${esc(guide.meaning)}</p>
+    ${arrow?`<div class="global-guide-direction">${esc(arrow.replace('좋음','유리'))}</div>`:''}
+    ${guide.example?`<div class="global-guide-example">${esc(guide.example)}</div>`:''}
+    <div class="global-guide-footer"><span>${esc(guide.target)}</span><button class="global-jump" type="button" data-term-jump="${esc(name)}">기록에서 확인 →</button></div>
+   </article>`;
+  }).join('')}`:'<div class="global-empty">일치하는 용어 없음 · 다른 검색어 입력</div>';
  }
  panel.addEventListener('click',e=>{const b=e.target.closest('[data-term-jump]');if(!b)return;active=false;update();jumpToTerm(b.dataset.termJump);});
  inp.addEventListener('focus',()=>{active=true;update()});
@@ -481,17 +581,37 @@ function alignSeasonPanels(){
  const rank=wrapper.querySelector('.rank-list'),expanded=wrapper.querySelector('.rank-expanded'),chart=wrapper.querySelector('.chart-panel');
  if(!rank||!expanded||!chart)return;
  // Measure actual row heights rather than assuming a fixed height.
- const offset=Array.from(rank.children).filter(el=>el.classList.contains('rank-row')).reduce((sum,el)=>sum+el.getBoundingClientRect().height,0);
+ const offset=Math.max(0,expanded.getBoundingClientRect().top-rank.getBoundingClientRect().top);
  chart.style.setProperty('--rank-detail-offset',`${offset}px`);
 }
 function goto(page){state.page=page;render();window.scrollTo({top:0,behavior:'smooth'})}
+function highlightGlossaryTarget(selector){
+ const target=document.querySelector(selector);
+ if(!target)return false;
+ target.classList.add('glossary-target-active');
+ target.scrollIntoView({behavior:'smooth',block:'center'});
+ setTimeout(()=>target.classList.remove('glossary-target-active'),4000);
+ return true;
+}
 function jumpToTerm(term){
- const season={승률:'wpct',득점:'runs',실점:'allowed',안타:'hits',홈런:'hr',평균자책점:'era'};
- const batter={타율:'avg',홈런:'hr',안타:'hits',볼넷:'bb',삼진:'so',OPS:'ops',출루율:'obp',장타율:'ops',타점:'rbi',도루:'stolen',병살:'dp',실책:'errors'};
- const pitcher={탈삼진:'k',피안타:'ha',피홈런:'hra','볼넷 허용':'bba',WHIP:'whip',구속:'era',구종:'k',이닝:'k'};
- if(term in season){state.seasonTab='regular';state.activeTeam=state.activeTeam||state.team||TEAMS[0].id;state.detailRole='overall';state.metric=season[term];goto('standings');requestAnimationFrame(()=>document.querySelector('.rank-row.selected')?.scrollIntoView({behavior:'smooth',block:'center'}));}
- else if(term in batter||term in pitcher){state.vsRole=term in pitcher?'pitcher':'hitter';state.vsMode='all';goto('versus');requestAnimationFrame(()=>document.querySelector('.vs-metrics')?.scrollIntoView({behavior:'smooth',block:'center'}));}
- else {learnState.termQuery=term;goto('learn');requestAnimationFrame(()=>document.getElementById('learnSearch')?.scrollIntoView({behavior:'smooth',block:'center'}));}
+ const guide=termGuide(term,'');
+ if(guide.role==='season'){
+   state.seasonTab='regular';state.activeTeam=state.activeTeam||state.team||TEAMS[0].id;
+   state.detailRole='overall';state.metric=guide.metric;goto('standings');
+   requestAnimationFrame(()=>highlightGlossaryTarget(`[data-metric="${guide.metric}"]`));
+ }else if(['hitter','pitcher'].includes(guide.role)){
+   state.vsRole=guide.role;state.vsMode='season';goto('versus');
+   requestAnimationFrame(()=>highlightGlossaryTarget(`[data-vs-metric="${guide.metric}"]`));
+ }else if(guide.role==='pitch-type'){
+   state.vsRole='pitcher';state.vsMode='season';goto('versus');
+   requestAnimationFrame(()=>highlightGlossaryTarget('.vs-top3-section'));
+ }else if(guide.role==='player'){
+   state.role=['이닝','세이브'].includes(term)?'pitcher':'hitter';state.sort=guide.metric||'';
+   goto('players');requestAnimationFrame(()=>highlightGlossaryTarget('.search-tools'));
+ }else{
+   learnState.termQuery=term;goto('learn');
+   requestAnimationFrame(()=>highlightGlossaryTarget('.learn-glossary'));
+ }
 }
 
 function setMyTeam(t){state.team=t;localStorage.setItem('kbo-myteam',t);$('modalRoot').innerHTML='';render()}
@@ -595,18 +715,21 @@ const VS_PITCHES=[
 ];
 
 function vsCoolHitZone(p){
- // Mock visualization only: not connected to actual batted-ball tracking.
+ // 5×5 demonstration grid, with the inner 3×3 clearly marked as the strike zone.
+ // Values are fictional placeholders, not actual player heat-zone data.
  const cells=Array.from({length:25},(_,i)=>{
+   const row=Math.floor(i/5),col=i%5;
+   const inner=row>=1&&row<=3&&col>=1&&col<=3;
    const v=(hash(`${p.id}:cool:${i}`)%270+110)/1000;
    const shade=Math.max(0,Math.min(1,(v-.11)/.27));
-   const r=Math.round(230-82*shade),g=Math.round(238-145*shade),b=Math.round(250-117*shade);
-   return `<div class="vs-cool-cell" style="background:rgb(${r},${g},${b});color:${shade>.62?'#fff':'#244463'}" title="시연용 타율 ${v.toFixed(3)}">${v.toFixed(3).replace(/^0/,'')}</div>`;
+   const r=Math.round(239-117*shade),g=Math.round(244-164*shade),b=Math.round(250-159*shade);
+   return `<div class="vs-cool-cell ${inner?'strike-cell':'outer-cell'}" style="background:rgb(${r},${g},${b});color:${shade>.63?'#fff':'#254663'}" title="${inner?'스트라이크존':'존 바깥'} · 시연용 타율 ${v.toFixed(3)}"><span>${v.toFixed(3).replace(/^0/,'')}</span></div>`;
  }).join('');
- return `<div class="vs-cool-zone" role="img" aria-label="${safe(p.name)} 시연용 쿨히트존, 5×5 구역별 예시 타율">
-   <div class="vs-zone-label">구역별 타율</div>
-   <div class="vs-cool-grid">${cells}</div>
-   <div class="vs-zone-footer"><span>낮음</span><span class="vs-zone-gradient"></span><span>높음</span></div>
-   <div class="vs-zone-disclaimer">시연용 구역별 수치 · 실제 타구 데이터 미연결</div>
+ return `<div class="vs-cool-zone" role="img" aria-label="${safe(p.name)}의 시연용 쿨히트존. 중앙 3×3 칸은 스트라이크존, 바깥 칸은 존 외곽">
+   <div class="vs-zone-label">쿨히트존 <span>· 시연용</span></div>
+   <div class="vs-cool-plot"><div class="vs-cool-grid">${cells}</div><div class="vs-strike-outline" aria-hidden="true"></div></div>
+   <div class="vs-zone-footer"><span>낮은 타율</span><span class="vs-zone-gradient"></span><span>높은 타율</span></div>
+   <div class="vs-zone-disclaimer">안쪽 3×3: 스트라이크존 · 실제 타구 데이터 미연결</div>
  </div>`;
 }
 function vsHomeRunField(p){
@@ -638,6 +761,35 @@ function vsTopPlayers(t,role){
 }
 function comparisonMotion(role){if(role==='all')return '';const pitcher=role==='pitcher';return `<div class="vs-motion ${pitcher?'pitcher':'batter'}" aria-label="${pitcher?'공을 던지는':'공을 치는'} 설명용 동작 애니메이션"><svg viewBox="0 0 240 110" role="img" aria-label="${pitcher?'투수 투구':'타자 스윙'}"><circle cx="63" cy="27" r="12" fill="#20395b"/><path d="M62 41 L68 72 L44 96 M68 72 L93 97" fill="none" stroke="#20395b" stroke-width="9" stroke-linecap="round"/><path d="M66 51 L37 67" stroke="#20395b" stroke-width="8" stroke-linecap="round"/><g class="athlete-arm"><path d="M65 49 L95 22" stroke="#20395b" stroke-width="8" stroke-linecap="round"/>${pitcher?'':`<path d="M95 22 L123 5" stroke="#a87843" stroke-width="6" stroke-linecap="round"/>`}</g><circle class="flying-ball" cx="102" cy="29" r="7" fill="#fff" stroke="#b73b4c" stroke-width="2"/></svg><span class="muted small">${pitcher?'투구':'타격'} 동작 예시</span></div>`;}
 
+const VS_METRIC_DEFINITIONS={
+ wpct:'승률: 승리 ÷ (승리 + 패배)',
+ runs:'득점: 팀이 얻은 점수',
+ allowed:'실점: 팀이 허용한 점수',
+ era:'평균자책점: 9이닝당 자책점',
+ hits:'안타: 출루에 성공한 안타 수',
+ hr:'홈런: 담장 밖으로 넘긴 타구',
+ stolen:'도루: 진루에 성공한 도루',
+ so:'삼진: 타자의 삼진 수',
+ dp:'병살: 한 플레이에서 2명 아웃',
+ errors:'실책: 수비 중 기록된 실수',
+ avg:'타율: 안타 ÷ 타수',
+ bb:'볼넷: 4볼로 출루',
+ ops:'OPS: 출루율 + 장타율',
+ k:'탈삼진: 삼진으로 잡은 타자',
+ ha:'피안타: 허용한 안타',
+ hra:'피홈런: 허용한 홈런',
+ bba:'볼넷 허용: 허용한 볼넷',
+ whip:'WHIP: (볼넷 + 피안타) ÷ 이닝'
+};
+function vsTeamMetricSide(t,value,width,reverse){
+ // Team totals cannot be attributed to individual players without verified source data.
+ const side=reverse?'vs-side reverse':'vs-side';
+ return `<div class="${side}" style="${styleTeam(t)}">
+   <span class="vs-metric-person" title="팀 합산 기록 · 개인별 기여 미연결">${safe(t.name)}</span>
+   <b class="vs-metric-value">${value}</b>
+   <div class="vs-metric-track"><span class="vs-metric-fill" style="width:${width}%"></span></div>
+ </div>`;
+}
 function vsDetails(a,b){
  const s1=TEAM_STATS[a.id],s2=TEAM_STATS[b.id],selected=state.vsMode,role=state.vsRole;
  const common=[['wpct','승률',false],['runs','득점',false],['allowed','실점',true],['era','평균자책점',true],['hits','안타',false],['hr','홈런',false],['stolen','도루',false],['so','삼진',true],['dp','병살',true],['errors','실책',true]];
@@ -647,9 +799,16 @@ function vsDetails(a,b){
  let hs1=7+hash(a.id+b.id)%8,hs2=7+hash(b.id+a.id)%8;
  return `<div class="inline-controls" style="justify-content:center"><button class="pill ${selected==='all'?'active':''}" data-vs-mode="all">전체 보기</button><button class="pill ${selected==='h2h'?'active':''}" data-vs-mode="h2h">맞대결 기록</button><button class="pill ${selected==='season'?'active':''}" data-vs-mode="season">시즌 전체 기록</button></div>${selected!=='season'?`<div class="note-box" style="text-align:center;margin:12px 0">맞대결 (예시) <b>${a.id} ${hs1}승 · ${hs2}승 ${b.id}</b></div>`:''}${selected!=='h2h'?`<div class="inline-controls" style="justify-content:center;margin:17px 0"><button class="pill ${role==='all'?'active':''}" data-vs-role="all">전체</button><button class="pill ${role==='hitter'?'active':''}" data-vs-role="hitter">타자</button><button class="pill ${role==='pitcher'?'active':''}" data-vs-role="pitcher">투수</button></div>${comparisonMotion(role)}<div class="vs-metrics">${fields.map(([k,label,low])=>{
  const v1=s1[k],v2=s2[k],max=Math.max(v1,v2,0.001)*1.13,w1=100*v1/max,w2=100*v2/max,win1=low?v1<v2:v1>v2,win2=low?v2<v1:v2>v1,draw=Math.abs(v1-v2)<.0001;
- const tip1=vsContributor(a,k),tip2=vsContributor(b,k);
- return `<div class="vs-row" tabindex="0" title="${a.name} 주요 선수: ${safe(tip1)} / ${b.name} 주요 선수: ${safe(tip2)}"><div class="vs-left" style="${styleTeam(a)}">${win1?'<span class="winner">우세</span>':''}<b class="vs-value">${fmt(k,v1)}</b><div class="vs-track"><span class="vs-fill" style="width:${w1}%"></span></div><span class="vs-extra-tooltip">${safe(tip1)}</span></div><div class="vs-center">${label}${low?'<span class="vs-small">↓ 낮을수록 좋음</span>':''}${draw?'<span class="vs-small">동일</span>':''}</div><div class="vs-right" style="${styleTeam(b)}"><div class="vs-track"><span class="vs-fill" style="width:${w2}%"></span></div><b class="vs-value">${fmt(k,v2)}</b>${win2?'<span class="winner">우세</span>':''}<span class="vs-extra-tooltip">${safe(tip2)}</span></div></div>`;
- }).join('')}</div><div class="tiny muted" style="margin-top:10px">그래프 수치는 팀 합계이며 아래 선수 이름은 해당 지표의 대표 선수 예시. 정확한 기여 기록은 공식 데이터 연결 후 제공 예정.</div>`:''}<section class="vs-top3-section"><div class="head-row"><h3 class="section-title">선수 TOP 3</h3><span class="tag">${role==='pitcher'?'탈삼진':'홈런'} 기준 · 시연용</span></div><div class="vs-top3-columns">${vsTopPlayers(a,role)}${vsTopPlayers(b,role)}</div></section>${selected!=='season'?`<hr class="inner-divider"><div class="head-row"><h3 class="section-title">경기별 결과</h3><button class="btn sm" data-match-sort>${state.matchOrder==='desc'?'최신순 ↓':'오래된순 ↑'}</button></div>${(state.matchOrder==='desc'?Array.from({length:5},(_,i)=>5-i):Array.from({length:5},(_,i)=>i+1)).map(i=>{
+ const tip=VS_METRIC_DEFINITIONS[k]||`${label}: ${label} 기록`;
+ return `<div class="vs-row vs-dual-row" data-vs-metric="${k}">
+   ${vsTeamMetricSide(a,fmt(k,v1),w1,false)}
+   <button type="button" class="vs-metric-info" data-vs-explain="${safe(k)}" aria-label="${safe(tip)}" aria-expanded="false">
+     <strong>${label}</strong><span class="vs-metric-direction">${low?'↓ 낮을수록 유리':'↑ 높을수록 유리'}</span>
+     <span class="vs-metric-tooltip" role="tooltip">${safe(tip)}</span>
+   </button>
+   ${vsTeamMetricSide(b,fmt(k,v2),w2,true)}
+ </div>`;
+ }).join('')}</div><div class="tiny muted" style="margin-top:10px">팀 합산 기록 · 개인별 기여 선수는 실제 기록 연결 후 표시</div>`:''}<section class="vs-top3-section"><div class="head-row"><h3 class="section-title">선수 TOP 3</h3><span class="tag">${role==='pitcher'?'탈삼진':'홈런'} 기준 · 시연용</span></div><div class="vs-top3-columns">${vsTopPlayers(a,role)}${vsTopPlayers(b,role)}</div></section>${selected!=='season'?`<hr class="inner-divider"><div class="head-row"><h3 class="section-title">경기별 결과</h3><button class="btn sm" data-match-sort>${state.matchOrder==='desc'?'최신순 ↓':'오래된순 ↑'}</button></div>${(state.matchOrder==='desc'?Array.from({length:5},(_,i)=>5-i):Array.from({length:5},(_,i)=>i+1)).map(i=>{
  const scoreA=2+hash(a.id+i)%7,scoreB=2+hash(b.id+i)%7,draw=scoreA===scoreB;
  const winner=scoreA>scoreB?a:b,loser=scoreA>scoreB?b:a;
  const wp=PLAYERS.find(p=>p.team===winner.id&&p.role==='pitcher'),lp=PLAYERS.find(p=>p.team===loser.id&&p.role==='pitcher');
@@ -699,12 +858,28 @@ function playerDetailPage(){
 function wire(){
  document.querySelectorAll('[data-rank-view]').forEach(b=>b.onclick=()=>{state.rankView=b.dataset.rankView;render()});
  if($('rankDailyMonth'))$('rankDailyMonth').onchange=e=>{state.rankDailyMonth=Number(e.target.value);render()};
+ document.querySelectorAll('[data-vs-explain]').forEach(b=>b.onclick=()=>{
+  const active=b.classList.contains('open');
+  document.querySelectorAll('[data-vs-explain]').forEach(x=>{x.classList.remove('open');x.setAttribute('aria-expanded','false')});
+  if(!active){b.classList.add('open');b.setAttribute('aria-expanded','true')}
+ });
  document.querySelectorAll('[data-vs-player]').forEach(b=>b.onclick=()=>{state.vsSelected[b.dataset.vsClub]=Number(b.dataset.vsPlayer);state.vsHeatFlip[b.dataset.vsClub]=false;render()});
- document.querySelectorAll('[data-vs-flip]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsFlip;state.vsHeatFlip[club]=!state.vsHeatFlip[club];const panel=b.closest('.vs-flip-panel');const card=panel?.querySelector('.vs-flip-card');if(card){card.classList.toggle('flipped',state.vsHeatFlip[club]);b.textContent=state.vsHeatFlip[club]?'↻ 홈런 분포 보기':'↻ 쿨히트존 보기';b.setAttribute('aria-pressed',String(state.vsHeatFlip[club]));}});
+ document.querySelectorAll('[data-vs-flip]').forEach(b=>b.onclick=e=>{e.preventDefault();const club=b.dataset.vsFlip;state.vsHeatFlip[club]=!state.vsHeatFlip[club];const panel=b.closest('.vs-flip-panel');const card=panel?.querySelector('.vs-flip-card');if(card){card.classList.toggle('flipped',state.vsHeatFlip[club]);b.textContent=state.vsHeatFlip[club]?'↻ 홈런 분포 보기':'↻ 쿨히트존 보기';b.setAttribute('aria-pressed',String(state.vsHeatFlip[club]));}});
  document.querySelectorAll('[data-vs-view]').forEach(b=>b.onclick=()=>{state.vsPitchView[b.dataset.vsClub]=b.dataset.vsView;render()});
  document.querySelectorAll('[data-vs-pitch]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsClub;const current=state.vsPitchTypes[club]||VS_PITCHES.map(x=>x.id);const id=b.dataset.vsPitch;state.vsPitchTypes[club]=current.includes(id)?current.filter(x=>x!==id):[...current,id];render()});
  document.querySelectorAll('[data-peer-player]').forEach(b=>b.onclick=()=>{state.selectedPlayer=Number(b.dataset.peerPlayer);state.pitchSelected=new Set(PITCHES.map(p=>p.id));state.selectedBall=null;render()});
-document.querySelectorAll('[data-season-tab]').forEach(b=>b.onclick=()=>{state.seasonTab=b.dataset.seasonTab;state.activeTeam='';render()});document.querySelectorAll('.vs-row').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('show-names')));document.querySelectorAll('[data-open-team]').forEach(b=>b.onclick=()=>{let t=b.dataset.openTeam;state.activeTeam=state.activeTeam===t?'':t;state.detailRole='overall';state.metric='wpct';state.detailPlayer=null;state.showArea=false;state.selectedBall=null;state.hitView='field';render();if(state.activeTeam){let target=document.querySelector('.rank-row.selected');if(target)target.scrollIntoView({behavior:'smooth',block:'nearest'})}});document.querySelectorAll('[data-close-team]').forEach(b=>b.onclick=()=>{state.activeTeam='';render()});document.querySelectorAll('[data-detail-role]').forEach(b=>b.onclick=()=>{state.detailRole=b.dataset.detailRole;state.metric=state.detailRole==='hitter'?'hr':'k';state.detailPlayer=null;state.hitView='field';render()});document.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{state.metric=b.dataset.metric;state.detailPlayer=null;render();document.querySelector('.metric-cell.active')?.scrollIntoView({behavior:'smooth',block:'nearest'})});document.querySelectorAll('[data-radar]').forEach(b=>b.style&&b.addEventListener('click',()=>{state.metric=b.dataset.radar;state.detailPlayer=null;render()}));document.querySelectorAll('[data-feature-player]').forEach(b=>b.onclick=()=>{state.detailPlayer=Number(b.dataset.featurePlayer);state.selectedBall=null;render()});document.querySelectorAll('[data-area-toggle]').forEach(b=>b.onclick=()=>{state.showArea=!state.showArea;render()});document.querySelectorAll('[data-area-metric]').forEach(b=>b.onclick=()=>{state.areaMetric=b.dataset.areaMetric;render()});document.querySelectorAll('[data-hit-view]').forEach(b=>b.onclick=()=>{state.hitView=state.hitView==='zone'?'field':'zone';render()});document.querySelectorAll('[data-ball]').forEach(b=>{const act=()=>{state.selectedBall=Number(b.dataset.ball);const p=state.page==='playerdetail'?PLAYERS.find(x=>x.id===state.selectedPlayer):teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole).find(q=>q.id===state.detailPlayer)||teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole)[0];const ball=sampleHomeRuns(p).find(x=>x.num===state.selectedBall);if(ball){$('ballTip').innerHTML=`<strong>${ball.num}호 홈런</strong><span>${ball.date}</span><span>${ball.opponent}</span><span>${ball.park}</span><span>${ball.dir}</span><span>비거리 ${ball.d}m</span><span>타구 속도 ${ball.v}km/h</span><span>발사각 ${ball.ang}°</span>`}};b.addEventListener('click',act);b.addEventListener('mouseenter',act);b.addEventListener('focus',act)});document.querySelectorAll('[data-pitch]').forEach(b=>b.onclick=()=>{const k=b.dataset.pitch;if(state.pitchSelected.has(k))state.pitchSelected.delete(k);else state.pitchSelected.add(k);render()});document.querySelectorAll('[data-pitch-view]').forEach(b=>b.onclick=()=>{state.pitchView=b.dataset.pitchView;render()});document.querySelectorAll('[data-pitch-replay]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pitch-path').forEach(p=>{p.style.animation='none';p.getBoundingClientRect();p.style.animation=''})});document.querySelectorAll('[data-vs-team]').forEach(b=>b.onclick=()=>{let k=b.dataset.vsTeam;if(state.vsTeams.includes(k))state.vsTeams=state.vsTeams.filter(x=>x!==k);else if(state.vsTeams.length<2)state.vsTeams.push(k);else state.vsTeams=[state.vsTeams[1],k];render()});if($('vsReset'))$('vsReset').onclick=()=>{state.vsTeams=[];render()};document.querySelectorAll('[data-vs-mode]').forEach(b=>b.onclick=()=>{state.vsMode=b.dataset.vsMode;render()});document.querySelectorAll('[data-vs-role]').forEach(b=>b.onclick=()=>{state.vsRole=b.dataset.vsRole;render()});document.querySelectorAll('[data-match]').forEach(b=>b.onclick=()=>{let i=Number(b.dataset.match);state.openMatch=state.openMatch===i?null:i;render()});document.querySelectorAll('[data-match-sort]').forEach(b=>b.onclick=()=>{state.matchOrder=state.matchOrder==='desc'?'asc':'desc';render()});if($('searchName')){let f=$('searchName');f.addEventListener('input',()=>{const caret=f.selectionStart;state.search=f.value;state.showAll=false;state.flipped=null;render();let n=$('searchName');n.focus();n.setSelectionRange(caret,caret)})}if($('clubFilter'))$('clubFilter').onchange=e=>{state.club=e.target.value;state.showAll=false;state.flipped=null;render()};if($('positionFilter'))$('positionFilter').onchange=e=>{state.position=e.target.value;state.showAll=false;render()};document.querySelectorAll('[data-search-role]').forEach(b=>b.onclick=()=>{state.role=b.dataset.searchRole;state.sort='';state.position='all';state.showAll=false;state.flipped=null;render()});document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{state.sort=state.sort===b.dataset.sort?'':b.dataset.sort;state.showAll=false;state.flipped=null;render()});if($('clearFilters'))$('clearFilters').onclick=()=>{state.search='';state.club='';state.role='all';state.sort='';state.position='all';state.showAll=false;state.flipped=null;state.collapsed.clear();render()};document.querySelectorAll('[data-cols]').forEach(b=>b.onclick=()=>{state.cardCols=Number(b.dataset.cols);localStorage.setItem('kbo-cols',state.cardCols);state.flipped=null;render()});document.querySelectorAll('[data-collapse]').forEach(b=>b.onclick=()=>{let k=b.dataset.collapse;if(state.collapsed.has(k))state.collapsed.delete(k);else state.collapsed.add(k);render()});if($('showAll'))$('showAll').onclick=()=>{state.showAll=!state.showAll;render()};document.querySelectorAll('[data-card]').forEach(b=>{function flip(e){if(e.target.closest('[data-open-player]'))return;state.flipped=state.flipped===Number(b.dataset.card)?null:Number(b.dataset.card);document.querySelectorAll('.flip-card').forEach(el=>el.classList.toggle('flipped',Number(el.dataset.card)===state.flipped))}b.addEventListener('click',flip);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip(e)}})});document.querySelectorAll('[data-open-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();state.selectedPlayer=Number(b.dataset.openPlayer);state.searchSnapshot={scroll:window.scrollY};goto('playerdetail')});if($('backToResults'))$('backToResults').onclick=()=>{state.page='players';render();window.scrollTo({top:state.searchSnapshot?.scroll||0,behavior:'instant'})};}
+document.querySelectorAll('[data-season-tab]').forEach(b=>b.onclick=()=>{state.seasonTab=b.dataset.seasonTab;state.activeTeam='';render()});document.querySelectorAll('.vs-row').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('show-names')));document.querySelectorAll('[data-open-team]').forEach(b=>b.onclick=()=>{let t=b.dataset.openTeam;state.activeTeam=state.activeTeam===t?'':t;state.detailRole='overall';state.metric='wpct';state.detailPlayer=null;state.showArea=false;state.selectedBall=null;state.hitView='field';render();if(state.activeTeam){let target=document.querySelector('.rank-row.selected');if(target)target.scrollIntoView({behavior:'smooth',block:'nearest'})}});document.querySelectorAll('[data-close-team]').forEach(b=>b.onclick=()=>{state.activeTeam='';render()});document.querySelectorAll('[data-detail-role]').forEach(b=>b.onclick=()=>{state.detailRole=b.dataset.detailRole;state.metric=state.detailRole==='hitter'?'hr':'k';state.detailPlayer=null;state.hitView='field';render()});document.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{state.metric=b.dataset.metric;state.detailPlayer=null;render();document.querySelector('.metric-cell.active')?.scrollIntoView({behavior:'smooth',block:'nearest'})});document.querySelectorAll('[data-radar]').forEach(b=>b.style&&b.addEventListener('click',()=>{state.metric=b.dataset.radar;state.detailPlayer=null;render()}));document.querySelectorAll('[data-feature-player]').forEach(b=>b.onclick=()=>{state.detailPlayer=Number(b.dataset.featurePlayer);state.selectedBall=null;render()});document.querySelectorAll('[data-area-toggle]').forEach(b=>b.onclick=()=>{state.showArea=!state.showArea;render()});document.querySelectorAll('[data-area-metric]').forEach(b=>b.onclick=()=>{state.areaMetric=b.dataset.areaMetric;render()});document.querySelectorAll('[data-hit-view]').forEach(b=>b.onclick=e=>{
+  e.preventDefault();
+  const scrollCard=document.querySelector('.player-expanded-card');
+  const preservedCardScroll=scrollCard?scrollCard.scrollTop:null;
+  const oldWindowY=window.scrollY;
+  const oldFocusKey=state.selectedPlayer;
+  state.hitView=state.hitView==='zone'?'field':'zone';
+  render();
+  const newScrollCard=document.querySelector('.player-expanded-card');
+  if(newScrollCard&&preservedCardScroll!==null&&oldFocusKey===state.selectedPlayer){newScrollCard.scrollTop=preservedCardScroll;}
+  if(Math.abs(window.scrollY-oldWindowY)>2)window.scrollTo({top:oldWindowY,behavior:'instant'});
+ });document.querySelectorAll('[data-ball]').forEach(b=>{const act=()=>{state.selectedBall=Number(b.dataset.ball);const p=state.page==='playerdetail'?PLAYERS.find(x=>x.id===state.selectedPlayer):teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole).find(q=>q.id===state.detailPlayer)||teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole)[0];const ball=sampleHomeRuns(p).find(x=>x.num===state.selectedBall);if(ball){$('ballTip').innerHTML=`<strong>${ball.num}호 홈런</strong><span>${ball.date}</span><span>${ball.opponent}</span><span>${ball.park}</span><span>${ball.dir}</span><span>비거리 ${ball.d}m</span><span>타구 속도 ${ball.v}km/h</span><span>발사각 ${ball.ang}°</span>`}};b.addEventListener('click',act);b.addEventListener('mouseenter',act);b.addEventListener('focus',act)});document.querySelectorAll('[data-pitch]').forEach(b=>b.onclick=()=>{const k=b.dataset.pitch;if(state.pitchSelected.has(k))state.pitchSelected.delete(k);else state.pitchSelected.add(k);render()});document.querySelectorAll('[data-pitch-view]').forEach(b=>b.onclick=()=>{state.pitchView=b.dataset.pitchView;render()});document.querySelectorAll('[data-pitch-replay]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pitch-path').forEach(p=>{p.style.animation='none';p.getBoundingClientRect();p.style.animation=''})});document.querySelectorAll('[data-vs-team]').forEach(b=>b.onclick=()=>{let k=b.dataset.vsTeam;if(state.vsTeams.includes(k))state.vsTeams=state.vsTeams.filter(x=>x!==k);else if(state.vsTeams.length<2)state.vsTeams.push(k);else state.vsTeams=[state.vsTeams[1],k];render()});if($('vsReset'))$('vsReset').onclick=()=>{state.vsTeams=[];render()};document.querySelectorAll('[data-vs-mode]').forEach(b=>b.onclick=()=>{state.vsMode=b.dataset.vsMode;render()});document.querySelectorAll('[data-vs-role]').forEach(b=>b.onclick=()=>{state.vsRole=b.dataset.vsRole;render()});document.querySelectorAll('[data-match]').forEach(b=>b.onclick=()=>{let i=Number(b.dataset.match);state.openMatch=state.openMatch===i?null:i;render()});document.querySelectorAll('[data-match-sort]').forEach(b=>b.onclick=()=>{state.matchOrder=state.matchOrder==='desc'?'asc':'desc';render()});if($('searchName')){let f=$('searchName');f.addEventListener('input',()=>{const caret=f.selectionStart;state.search=f.value;state.showAll=false;state.flipped=null;render();let n=$('searchName');n.focus();n.setSelectionRange(caret,caret)})}if($('clubFilter'))$('clubFilter').onchange=e=>{state.club=e.target.value;state.showAll=false;state.flipped=null;render()};if($('positionFilter'))$('positionFilter').onchange=e=>{state.position=e.target.value;state.showAll=false;render()};document.querySelectorAll('[data-search-role]').forEach(b=>b.onclick=()=>{state.role=b.dataset.searchRole;state.sort='';state.position='all';state.showAll=false;state.flipped=null;render()});document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{state.sort=state.sort===b.dataset.sort?'':b.dataset.sort;state.showAll=false;state.flipped=null;render()});if($('clearFilters'))$('clearFilters').onclick=()=>{state.search='';state.club='';state.role='all';state.sort='';state.position='all';state.showAll=false;state.flipped=null;state.collapsed.clear();render()};document.querySelectorAll('[data-cols]').forEach(b=>b.onclick=()=>{state.cardCols=Number(b.dataset.cols);localStorage.setItem('kbo-cols',state.cardCols);state.flipped=null;render()});document.querySelectorAll('[data-collapse]').forEach(b=>b.onclick=()=>{let k=b.dataset.collapse;if(state.collapsed.has(k))state.collapsed.delete(k);else state.collapsed.add(k);render()});if($('showAll'))$('showAll').onclick=()=>{state.showAll=!state.showAll;render()};document.querySelectorAll('[data-card]').forEach(b=>{function flip(e){if(e.target.closest('[data-open-player]'))return;state.flipped=state.flipped===Number(b.dataset.card)?null:Number(b.dataset.card);document.querySelectorAll('.flip-card').forEach(el=>el.classList.toggle('flipped',Number(el.dataset.card)===state.flipped))}b.addEventListener('click',flip);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip(e)}})});document.querySelectorAll('[data-open-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();state.selectedPlayer=Number(b.dataset.openPlayer);state.searchSnapshot={scroll:window.scrollY};goto('playerdetail')});if($('backToResults'))$('backToResults').onclick=()=>{state.page='players';render();window.scrollTo({top:state.searchSnapshot?.scroll||0,behavior:'instant'})};}
 document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>goto(b.dataset.page)));
 $('brandBtn').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 $('myTeamBtn').onclick=()=>openIntro(false);
