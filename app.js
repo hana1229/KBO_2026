@@ -45,11 +45,28 @@ const state={page:'standings',team:localStorage.getItem('kbo-myteam')||'',active
 if(![3,4].includes(state.cardCols))state.cardCols=3;
 const $=id=>document.getElementById(id);
 function flashNotice(text){const n=$('notice');n.innerHTML=`<strong>${text}</strong>`;setTimeout(()=>{n.innerHTML='<strong>시연용 초안</strong> · 순위·수치·선수명·홈런 좌표는 임시 데이터입니다. 실제 2026 공식 기록 미연결.'},2800)}
-function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():playerDetailPage();wire();}
+function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():state.page==='learn'?learnGamePage():playerDetailPage();wire();if(state.page==='learn')wireLearnGame();}
 function goto(page){state.page=page;render();window.scrollTo({top:0,behavior:'smooth'})}
 function setMyTeam(t){state.team=t;localStorage.setItem('kbo-myteam',t);$('modalRoot').innerHTML='';render()}
-function openIntro(first=false){const sel=state.team;let tmp=sel;const root=$('modalRoot');root.innerHTML=`<div class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-card"><div class="head-row"><h2 class="section-title">사이트명 <span class="tiny muted">(교체 전)</span></h2>${first?'':`<button class="btn sm" id="closeModal">닫기 ✕</button>`}</div><div class="comic-grid">${[['⚾','야구가 궁금해?'],['📊','기록을 살펴보자'],['✨','우리 팀부터!']].map(([emo,txt])=>`<div class="comic-panel"><span>${emo}</span><strong>${txt}</strong><small>(교체 전)</small></div>`).join('')}</div><h3 class="section-title" style="font-size:16px">My Team 선택</h3><div class="modal-teams">${TEAMS.map(t=>`<button class="team-choose ${tmp===t.id?'selected':''}" data-choose="${t.id}" style="${styleTeam(t)}">${logo(t)}<span>${safe(t.name)}</span></button>`).join('')}<button class="team-choose ${!tmp?'selected':''}" data-choose="" style="--team:#96a5b6;--light:#eef0f4"><span class="logo" style="--team:#9dadbc">＋</span>미선택</button></div><div class="modal-actions"><button class="btn primary" id="confirmTeam">기록 확인 →</button></div></div></div>`;
- root.querySelectorAll('[data-choose]').forEach(b=>b.addEventListener('click',()=>{tmp=b.dataset.choose;root.querySelectorAll('[data-choose]').forEach(a=>a.classList.toggle('selected',a.dataset.choose===tmp))}));$('confirmTeam').onclick=()=>{localStorage.setItem('kbo-intro-seen','yes');setMyTeam(tmp)};if(!first)$('closeModal').onclick=()=>root.innerHTML='';}
+function openIntro(first=false){
+ const sel=state.team;let tmp=sel;const root=$('modalRoot');
+ root.innerHTML=`<div class="modal-overlay intro-overlay" role="dialog" aria-modal="true" aria-label="인트로와 응원 구단 선택">
+ <div class="modal-card intro-modal">
+  <div class="intro-art-wrap">
+   <div class="intro-art-stage"><img class="intro-comic-art" src="intro_art.png" alt="사용자가 제작한 야구 인트로 만화" draggable="false"></div>
+   <span class="intro-art-tag">인트로 원본</span>
+  </div>
+  <div class="intro-choice-wrap">
+   <div class="head-row intro-heading"><h2 class="section-title">사이트명 <span class="tiny muted">(교체 전)</span></h2>${first?'':`<button class="btn sm" id="closeModal">닫기 ✕</button>`}</div>
+   <div class="intro-choice-title">My Team 선택</div>
+   <div class="modal-teams">${TEAMS.map(t=>`<button class="team-choose ${tmp===t.id?'selected':''}" data-choose="${t.id}" style="${styleTeam(t)}">${logo(t)}<span>${safe(t.name)}</span></button>`).join('')}<button class="team-choose ${!tmp?'selected':''}" data-choose="" style="--team:#96a5b6;--light:#eef0f4"><span class="logo" style="--team:#9dadbc">＋</span>미선택</button></div>
+   <div class="modal-actions"><button class="btn primary intro-enter" id="confirmTeam">기록 확인 →</button></div>
+  </div>
+ </div></div>`;
+ root.querySelectorAll('[data-choose]').forEach(b=>b.addEventListener('click',()=>{tmp=b.dataset.choose;root.querySelectorAll('[data-choose]').forEach(a=>a.classList.toggle('selected',a.dataset.choose===tmp))}));
+ $('confirmTeam').onclick=()=>{localStorage.setItem('kbo-intro-seen','yes');setMyTeam(tmp)};
+ if(!first)$('closeModal').onclick=()=>root.innerHTML='';
+}
 function standingLine(){const series=TEAMS.map((t,idx)=>Array.from({length:7},(_,m)=>{let rank=clamp(idx+1+Math.round(Math.sin((m+2)*1.4+idx)*2),1,10);return rank}));return `<svg class="rank-plot line-chart-svg" viewBox="0 0 520 285" role="img" aria-label="시연용 월말 순위 변화 그래프"><g stroke="#e7ebf0" stroke-width="1">${Array.from({length:10},(_,i)=>`<line x1="39" x2="503" y1="${20+i*24}" y2="${20+i*24}"/>`).join('')}</g>${Array.from({length:10},(_,i)=>`<text x="25" y="${24+i*24}" fill="#8996a5" font-size="10" text-anchor="end">${i+1}</text>`).join('')}${Array.from({length:7},(_,i)=>`<text x="${44+i*74}" y="270" fill="#8996a5" font-size="11" text-anchor="middle">${i+3}월</text>`).join('')}${TEAMS.map((t,idx)=>{const pts=series[idx].map((rk,i)=>`${44+i*74},${20+(rk-1)*24}`).join(' ');let dim=state.team&&state.team!==t.id;return `<polyline points="${pts}" fill="none" stroke="${t.color}" stroke-width="${dim?1.5:3}" opacity="${dim?.22:.9}" stroke-linecap="round" stroke-linejoin="round"/>${series[idx].map((rk,i)=>`<circle cx="${44+i*74}" cy="${20+(rk-1)*24}" r="${dim?2:3}" fill="${t.color}"><title>${t.name} · ${i+3}월 말 시연 순위 ${rk}위</title></circle>`).join('')}`}).join('')}</svg>`}
 function standingsPage(){return `<div class="head-row"><div><h1 class="page-title">2026 시즌 순위</h1></div><span class="tag">시연용 순위</span></div><div class="standings-container ${state.activeTeam?'is-expanded':''}"><div class="surface rank-list">${TEAMS.map(t=>{const s=TEAM_STATS[t.id];return `<button class="rank-row ${state.team===t.id?'my-row':''} ${state.activeTeam===t.id?'selected':''}" style="${styleTeam(t)}" data-open-team="${t.id}" aria-expanded="${state.activeTeam===t.id}"><span class="rank-no">${s.rank}</span>${logo(t)}<span class="rank-name">${t.name}</span><span class="rank-chevron">${state.activeTeam===t.id?'⌃':'⌄'}</span></button>${state.activeTeam===t.id?`<div class="rank-expanded"><div class="expand-inner">${teamDetail(t)}</div></div>`:''}`}).join('')}</div>${state.activeTeam?`<div class="surface chart-panel spotlight-panel">${teamPlayerPanel(TEAM_MAP[state.activeTeam])}</div>`:`<div class="surface chart-panel"><div class="head-row"><h2 class="section-title">시즌 순위 변화</h2><span class="tag">월말 기준 · 예시</span></div>${standingLine()}<div class="chart-legend">${TEAMS.map(t=>`<span class="legend-item" style="--c:${t.color}"><span class="legend-dot"></span>${t.id}</span>`).join('')}</div></div>`}</div>`}
 function averages(role){const metrics=role==='hitter'?HITTER_METRICS:PITCHER_METRICS;return Object.fromEntries(metrics.map(([k])=>[k,TEAMS.reduce((n,t)=>n+TEAM_STATS[t.id][k],0)/TEAMS.length]))}
@@ -79,4 +96,5 @@ document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>
 $('brandBtn').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 $('myTeamBtn').onclick=()=>openIntro(false);
 $('toTop').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+initGlobalGlossary();
 render();openIntro(true); // 초안 검토 중: 새로고침 시 인트로를 항상 보여줌

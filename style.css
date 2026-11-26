@@ -31,3 +31,33 @@ body{background:#f5f7fb}
 .spotlight .top-player .tiny{font-size:10px}
 @media(max-width:1000px){.standings-container{grid-template-columns:1fr}.spotlight-panel{position:static;max-height:none;overflow:visible}}
 @media(max-width:720px){.spotlight-panel{padding:12px}.spotlight .top-player{display:block;padding:7px 3px}.spotlight .top-three{gap:5px}.spotlight .player-feature{grid-template-columns:1fr}.spotlight .feature-picture{min-height:110px}}
+
+/* 2026-11-26: 사용자 제공 인트로 만화 / GIF 느낌의 부드러운 움직임 */
+.intro-overlay{background:rgba(8,22,42,.78);padding:22px}
+.intro-modal{width:min(1050px,100%);max-width:1050px;max-height:min(92vh,850px);padding:0;display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);overflow:hidden;border-radius:22px}
+.intro-art-wrap{background:#fff;position:relative;display:grid;place-items:center;min-height:480px;overflow:hidden;padding:19px}
+.intro-art-stage{width:100%;display:grid;place-items:center;aspect-ratio:1;max-height:740px;overflow:hidden;will-change:transform;animation:intro-panel-float 4.8s ease-in-out infinite alternate}
+.intro-comic-art{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 54%;will-change:transform;animation:intro-art-twitch 3.3s steps(1,end) infinite,intro-art-breathe 6.3s ease-in-out infinite}
+.intro-art-tag{position:absolute;left:28px;bottom:20px;background:#fff;border:1px solid #dfe5ed;color:#556579;font-size:10px;font-weight:750;border-radius:100px;padding:5px 10px;box-shadow:0 3px 10px #00000012}
+.intro-choice-wrap{display:flex;flex-direction:column;min-width:0;padding:28px 24px 26px;background:#f8fafd;overflow-y:auto}
+.intro-heading{margin-bottom:22px}
+.intro-choice-title{font-size:19px;font-weight:850;letter-spacing:-.025em;margin-bottom:5px;color:var(--navy)}
+.intro-choice-wrap .modal-teams{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0 20px}
+.intro-choice-wrap .team-choose{min-height:76px;background:#fff;border-radius:12px}
+.intro-choice-wrap .team-choose.selected{background:var(--light)}
+.intro-choice-wrap .modal-actions{margin-top:auto}
+.intro-enter{width:100%;justify-content:center;min-height:47px;font-size:15px}
+@keyframes intro-panel-float{0%{transform:translateY(1px)}100%{transform:translateY(-5px)}}
+@keyframes intro-art-breathe{0%,100%{transform:scale(1.005)}50%{transform:scale(1.027)}}
+@keyframes intro-art-twitch{0%,83%,100%{filter:contrast(1)}88%{filter:contrast(1.10)}92%{filter:contrast(.97)}}
+@media(max-width:750px){.intro-overlay{padding:8px;align-items:flex-start}.intro-modal{display:block;overflow-y:auto;max-height:calc(100dvh - 16px);border-radius:17px}.intro-art-wrap{padding:6px 12px;min-height:0}.intro-art-stage{max-height:min(48dvh,470px)}.intro-art-tag{left:16px;bottom:10px;font-size:9px;padding:4px 8px}.intro-choice-wrap{padding:14px 17px 18px;overflow:visible}.intro-heading{margin-bottom:9px}.intro-choice-title{font-size:15px}.intro-choice-wrap .modal-teams{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:9px 0 14px}.intro-choice-wrap .team-choose{font-size:9px;min-height:60px;padding:6px 2px;gap:3px}.intro-choice-wrap .team-choose .logo{width:24px;height:24px;font-size:10px}.intro-enter{min-height:42px}}
+@media(max-width:430px){.intro-choice-wrap .modal-teams{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.intro-art-stage,.intro-comic-art{animation:none}}
+
+/* 인트로 정사각형 이미지: 기존 크기의 약 50%, 여백을 둔 중앙 배치 */
+.intro-art-wrap{min-height:360px}
+.intro-art-stage{width:50%;max-width:330px;max-height:none;flex-shrink:0}
+@media(max-width:750px){
+  .intro-art-wrap{min-height:0;padding:24px 12px}
+  .intro-art-stage{width:50%;max-width:260px;max-height:none}
+}
