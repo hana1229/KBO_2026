@@ -3,3 +3,31 @@
 @media(max-width:1000px){.topbar{padding:0 20px;gap:14px}.standings-container{grid-template-columns:1fr}.chart-panel{min-height:320px}.result-grid.four{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:720px){.topbar{height:62px;gap:7px;padding:0 10px}.brand{font-size:11px;gap:3px}.brand-mark{font-size:16px}.brand small{display:none}.nav{gap:0;justify-content:center}.nav-btn{font-size:11px;padding:0 7px}.nav-btn.active:after{left:5px;right:5px}.myteam{padding:6px;gap:3px;font-size:10px}.myteam #myTeamSymbol{min-width:18px;height:18px}.demo-bar{font-size:10px;padding:7px 10px}main{padding:21px 12px 75px}.page-title{font-size:24px}.pad{padding:14px}.standings-container{gap:12px}.rank-row{padding:9px 10px;min-height:53px}.rank-expanded .expand-inner{padding:10px}.team-detail{padding:11px}.detail-top{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.metric-cell{padding:10px}.metric-number{font-size:17px}.top-three{gap:4px}.top-player{display:block;text-align:center;padding:8px 3px}.top-player .mini-avatar{display:none}.player-feature{grid-template-columns:1fr;gap:11px}.feature-picture{min-height:150px}.feature-picture .figure{font-size:76px}.vs-row{grid-template-columns:minmax(0,1fr) 94px minmax(0,1fr);gap:5px}.vs-value{font-size:10px}.winner{font-size:8px}.vs-center{font-size:10px}.vs-track{height:9px}.vs-side b{font-size:15px}.vs-choice{padding:6px 7px}.search-tools{padding:12px}.search-top{flex-wrap:wrap}.search-input{width:65%}.result-grid,.result-grid.four{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.flip-card{height:285px}.flip-photo{height:140px}.flip-photo .silhouette{font-size:83px}.flip-info{padding:10px}.flip-info .person-title{font-size:13px}.flip-info .person-sub{font-size:10px}.flip-stats{margin-top:11px}.flip-stat label{font-size:9px}.flip-stat b{font-size:12px}.back-main{padding:11px 9px 12px 30%}.back-main h3{font-size:11px}.mini-bar-row{margin-top:10px}.mini-bar-row .head{font-size:9px}.detail-link{font-size:10px}.detail-hero{grid-template-columns:1fr;padding:15px;gap:9px}.hero-picture{min-height:150px;font-size:90px}.hero-name{font-size:23px}.hero-metrics{gap:5px}.hero-metric{padding:8px}.hero-metric b{font-size:16px}.modal-card{padding:16px}.modal-teams{grid-template-columns:repeat(3,1fr)}.comic-grid{gap:5px}.comic-panel{padding:5px}.comic-panel span{font-size:25px}.comic-panel strong{font-size:10px}.comic-panel small{font-size:9px}.footer{padding:17px 15px;display:block}.footer-right{text-align:left;margin-top:8px}.to-top{right:12px;bottom:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* 2차 UI 정리: 열린 구단의 선수 기록을 오른쪽 패널에 표시 */
+:root{--navy:#132c50;--line:#e4eaf2}
+body{background:#f5f7fb}
+.surface{box-shadow:0 8px 28px rgba(21,47,82,.035)}
+.standings-container{grid-template-columns:minmax(0,1.09fr) minmax(0,1fr);gap:22px}
+.rank-list,.chart-panel{border-radius:17px}
+.rank-row:hover{background:#f6f9fd}
+.rank-row.selected{background:color-mix(in srgb,var(--light,#eaf1f8) 32%,white)}
+.rank-expanded .expand-inner{padding:18px 18px 24px}
+.spotlight-panel{padding:18px;min-height:440px;position:sticky;top:94px;max-height:calc(100vh - 112px);overflow-y:auto;scrollbar-width:thin}
+.spotlight-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+.spotlight-heading>span{display:flex;align-items:center;gap:8px}
+.spotlight #teamPlayers{margin-top:16px!important}
+.spotlight .top-three{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.spotlight .top-player{padding:10px 7px;gap:5px}
+.spotlight .top-player .mini-avatar{display:none}
+.spotlight .top-player .rank{font-size:12px}
+.spotlight .player-feature{grid-template-columns:1fr;gap:12px;margin-top:12px}
+.spotlight .feature-picture{min-height:125px;flex-direction:row;gap:15px;align-items:center;justify-content:center}
+.spotlight .feature-picture .figure{font-size:55px}
+.spotlight .field-svg{max-height:320px}
+.spotlight .pitch-area .field-svg{max-height:245px}
+.spotlight .feature-tools{min-width:0}
+.spotlight .top-player strong{font-size:12px}
+.spotlight .top-player .tiny{font-size:10px}
+@media(max-width:1000px){.standings-container{grid-template-columns:1fr}.spotlight-panel{position:static;max-height:none;overflow:visible}}
+@media(max-width:720px){.spotlight-panel{padding:12px}.spotlight .top-player{display:block;padding:7px 3px}.spotlight .top-three{gap:5px}.spotlight .player-feature{grid-template-columns:1fr}.spotlight .feature-picture{min-height:110px}}
