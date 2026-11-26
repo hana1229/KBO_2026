@@ -38,36 +38,33 @@ body{background:#f5f7fb}
 @media(max-width:1000px){.standings-container{grid-template-columns:1fr}.spotlight-panel{position:static;max-height:none;overflow:visible}}
 @media(max-width:720px){.spotlight-panel{padding:12px}.spotlight .top-player{display:block;padding:7px 3px}.spotlight .top-three{gap:5px}.spotlight .player-feature{grid-template-columns:1fr}.spotlight .feature-picture{min-height:110px}}
 
-/* 2026-11-26: 인트로 재정리 — 뒤 배경 숨김, 단독 랜딩형 레이아웃 */
-.intro-overlay{background:#f4f4f4;padding:0;align-items:stretch;justify-content:center}
-.intro-modal{width:100%;max-width:none;min-height:100dvh;background:#f4f4f4;border-radius:0;box-shadow:none;border:0;display:flex;align-items:center;justify-content:center;padding:36px 20px;overflow:auto}
-.intro-landing{width:min(1120px,100%);display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
-.intro-title-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
-.intro-title{margin:0;font-size:clamp(44px,7vw,72px);line-height:1;font-weight:700;color:#1a1a1a;font-family:"Nanum Pen Script","Bradley Hand","Apple Chancery","Comic Sans MS",cursive;letter-spacing:-.03em}
-.intro-title .t1{display:inline-block;transform:rotate(-2.2deg)}
-.intro-title .t2{display:inline-block;transform:rotate(1.8deg);margin-left:8px}
-.intro-title-note{font-size:18px;color:#616d7a;font-weight:700}
-.intro-skip{align-self:flex-end;border:0;background:transparent;color:#8390a0;font-size:12px;font-weight:700}
-.intro-art-wrap{position:relative;display:grid;place-items:center;min-height:0;padding:0;background:transparent}
-.intro-art-stage{width:min(44vw,400px);max-width:400px;min-width:240px;aspect-ratio:1;display:grid;place-items:center;animation:intro-panel-float 4.8s ease-in-out infinite alternate}
-.intro-comic-art{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 54%;animation:intro-art-twitch 3.3s steps(1,end) infinite,intro-art-breathe 6.3s ease-in-out infinite}
-.intro-art-tag{position:absolute;left:-18px;bottom:-20px;background:#fff;border:1px solid #dfe5ed;color:#556579;font-size:10px;font-weight:750;border-radius:100px;padding:5px 10px;box-shadow:0 3px 10px #00000012}
-.intro-team-board{width:min(100%,1040px);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;justify-content:center}
-.intro-team-board .team-choose{min-height:118px;border-radius:16px;border:5px solid var(--team);background:color-mix(in srgb, var(--team) 12%, #fff);box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:850;padding:10px 8px}
-.intro-team-board .team-choose .logo{width:68px;height:68px;border-radius:14px;font-size:20px;border:0;box-shadow:inset 0 0 0 4px rgba(255,255,255,.45)}
-.intro-team-board .team-choose.selected{transform:translateY(-2px);box-shadow:0 0 0 5px #1b2f63;background:color-mix(in srgb, var(--team) 16%, #fff)}
-.intro-team-board .team-choose.selected .logo{box-shadow:0 0 0 4px #1b2f63,inset 0 0 0 4px rgba(255,255,255,.45)}
-.intro-team-board .team-choose.neutral{border-color:#9da8b6;background:#f8fafc}
-.intro-team-board .team-choose.neutral .logo{background:#9dadbc}
-.intro-action-row{display:flex;justify-content:center;width:100%;margin-top:2px}
-.intro-enter{min-width:210px;min-height:92px;border-radius:14px;font-size:24px;font-weight:850;padding:0 32px;background:#2c377d;border:5px solid #1f244e;color:#fff;box-shadow:none}
-.intro-helper{font-size:12px;color:#6d7785}
-@keyframes intro-panel-float{0%{transform:translateY(1px)}100%{transform:translateY(-5px)}}
-@keyframes intro-art-breathe{0%,100%{transform:scale(1.01)}50%{transform:scale(1.04)}}
-@keyframes intro-art-twitch{0%,83%,100%{filter:contrast(1)}88%{filter:contrast(1.10)}92%{filter:contrast(.97)}}
-@media(max-width:900px){.intro-modal{padding:24px 16px}.intro-landing{gap:20px}.intro-team-board{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.intro-team-board .team-choose{min-height:100px;font-size:13px;border-width:4px}.intro-team-board .team-choose .logo{width:54px;height:54px;font-size:16px}.intro-enter{min-height:72px;font-size:21px}}
-@media(max-width:680px){.intro-team-board{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.intro-art-stage{width:min(72vw,340px);min-width:210px}.intro-title{font-size:clamp(34px,10vw,56px)}.intro-title-note{font-size:14px}.intro-team-board .team-choose{min-height:88px;font-size:11px;padding:8px 4px}.intro-team-board .team-choose .logo{width:42px;height:42px;border-radius:12px;font-size:13px}.intro-enter{min-width:180px;min-height:62px;font-size:18px;border-width:4px}.intro-art-tag{left:0;bottom:-18px}}
-@media(max-width:430px){.intro-team-board{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 인트로: 화이트 전면, PC 구단 10개 한 줄, 하단 선택/확인 */
+.intro-overlay{position:fixed;inset:0;z-index:200;background:#fff;overflow:auto;padding:0;display:block}
+.intro-modal{width:100%;max-width:none;min-height:100dvh;border:0;box-shadow:none;border-radius:0;padding:22px 24px 26px;background:#fff;display:flex;justify-content:center;align-items:center;overflow:visible}
+.intro-landing{width:min(1180px,100%);display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;margin:auto}
+.intro-title-wrap{flex-shrink:0}
+.intro-title{margin:0;color:#181818;font-size:clamp(38px,4.4vw,61px);line-height:1.13;font-weight:800;letter-spacing:-.035em;font-family:"Nanum Pen Script","Bradley Hand","Apple Chancery","Comic Sans MS",cursive}
+.intro-title .t1{display:inline-block;transform:rotate(-2deg)}
+.intro-title .t2{display:inline-block;transform:rotate(1.8deg)}
+.intro-skip{align-self:flex-end;border:0;background:transparent;color:#7c8797;font-weight:700}
+.intro-art-wrap{display:flex;align-items:center;justify-content:center;background:#fff;position:relative;flex-shrink:1;min-height:0;padding:0}
+.intro-art-stage{width:clamp(200px,29vw,325px);aspect-ratio:1;max-width:100%;display:flex;align-items:center;justify-content:center;animation:intro-panel-float 4.8s ease-in-out infinite alternate}
+.intro-comic-art{width:100%;height:100%;display:block;object-fit:contain;animation:intro-art-twitch 3.3s steps(1,end) infinite,intro-art-breathe 6.3s ease-in-out infinite}
+.intro-team-board{width:100%;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;margin:2px 0 0}
+.intro-team-board .team-choose{min-width:0;min-height:87px;padding:8px 3px 7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:2px solid #dfe5ee;border-radius:10px;background:#fff;box-shadow:none;font-size:10px;line-height:1.2;font-weight:800;color:#172538;white-space:normal}
+.intro-team-board .team-choose .logo{width:39px;height:39px;font-size:11px;border-radius:9px;border:0;box-shadow:none}
+.intro-team-board .team-choose.selected{border-color:var(--team);background:var(--light);box-shadow:0 0 0 1px var(--team);transform:none}
+.intro-team-board .team-choose:hover{border-color:var(--team)}
+.intro-action-row{display:flex;align-items:stretch;justify-content:center;gap:10px;width:min(470px,100%);margin:0}
+.intro-no-team{flex:0 0 42%;min-height:54px;border:2px solid #d9e1ec;border-radius:10px;background:#fff;color:#34445c;font-size:14px;font-weight:800}
+.intro-no-team.selected{border-color:#1a365a;background:#eef2f8;box-shadow:0 0 0 1px #1a365a}
+.intro-enter{flex:1;min-width:0;min-height:54px;padding:8px 20px;background:#243770;color:#fff;border:2px solid #243770;border-radius:10px;box-shadow:none;font-size:16px;font-weight:800}
+@keyframes intro-panel-float{0%{transform:translateY(1px)}100%{transform:translateY(-3px)}}
+@keyframes intro-art-breathe{0%,100%{transform:scale(1)}}50%{transform:scale(1.015)}}
+@keyframes intro-art-twitch{0%,83%,100%{filter:contrast(1)}88%{filter:contrast(1.05)}92%{filter:contrast(.98)}}
+@media(max-height:760px) and (min-width:801px){.intro-modal{padding:14px 24px}.intro-landing{gap:11px}.intro-art-stage{width:clamp(170px,26vh,255px)}.intro-team-board .team-choose{min-height:76px}.intro-enter,.intro-no-team{min-height:45px}}
+@media(max-width:800px){.intro-modal{padding:20px 12px}.intro-landing{gap:15px}.intro-team-board{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.intro-team-board .team-choose{min-height:74px;font-size:10px}.intro-team-board .team-choose .logo{width:33px;height:33px}.intro-art-stage{width:min(52vw,290px)}.intro-title{font-size:clamp(35px,8vw,50px)}}
+@media(max-width:420px){.intro-team-board{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.intro-team-board .team-choose{padding:5px 2px;font-size:9px;min-height:68px}.intro-team-board .team-choose .logo{width:27px;height:27px;font-size:9px}.intro-art-stage{width:min(60vw,250px)}.intro-no-team,.intro-enter{min-height:47px;font-size:13px}}
 @media(prefers-reduced-motion:reduce){.intro-art-stage,.intro-comic-art{animation:none}}
 
 /* Baseball rules learning: two games plus searchable terminology */
@@ -275,8 +272,8 @@ function openIntro(first=false){
    <div class="intro-art-wrap">
     <div class="intro-art-stage"><img class="intro-comic-art" src="intro_art.png" alt="사용자가 제작한 야구 인트로 만화" draggable="false"></div>
    </div>
-   <div class="intro-team-board modal-teams">${TEAMS.map(t=>`<button class="team-choose ${tmp===t.id?'selected':''}" data-choose="${t.id}" style="${styleTeam(t)}">${logo(t,'lg')}<span>${safe(t.name)}</span></button>`).join('')}<button class="team-choose neutral ${!tmp?'selected':''}" data-choose="" style="--team:#9da8b6;--light:#eef0f4"><span class="logo lg" style="--team:#9dadbc">＋</span><span>미선택</span></button></div>
-   <div class="intro-action-row"><button class="btn primary intro-enter" id="confirmTeam">기록 확인</button></div>
+   <div class="intro-team-board modal-teams">${TEAMS.map(t=>`<button class="team-choose ${tmp===t.id?'selected':''}" data-choose="${t.id}" style="${styleTeam(t)}">${logo(t,'lg')}<span>${safe(t.name)}</span></button>`).join('')}</div>
+   <div class="intro-action-row"><button class="intro-no-team ${!tmp?'selected':''}" data-choose="">미선택</button><button class="btn primary intro-enter" id="confirmTeam">기록 확인 →</button></div>
   </div>
  </div></div>`;
  root.querySelectorAll('[data-choose]').forEach(b=>b.addEventListener('click',()=>{tmp=b.dataset.choose;root.querySelectorAll('[data-choose]').forEach(a=>a.classList.toggle('selected',a.dataset.choose===tmp))}));
