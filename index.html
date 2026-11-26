@@ -274,6 +274,42 @@ body{background:#f5f7fb}
 .rank-after .rank-row{width:100%;min-height:59px}
 .rank-after .rank-row:last-child{border-bottom:0}
 @media(max-width:1000px){.rank-after{margin-top:12px}}
+
+/* TOP3 hitter: genuine front/back rotation; no duplicate small portrait. */
+.vs-flip-panel{min-width:0;overflow:visible}
+.vs-flip-heading{justify-content:space-between;gap:8px;min-height:30px;margin-bottom:5px}
+.vs-flip-toggle{border:1px solid #cfd9e8;background:#fff;color:#18365b;border-radius:9px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}
+.vs-flip-toggle:hover{background:#edf3fa}
+.vs-flip-perspective{perspective:1100px;min-width:0}
+.vs-flip-card{position:relative;min-height:236px;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.68,.2,1)}
+.vs-flip-card.flipped{transform:rotateY(180deg)}
+.vs-flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:12px}
+.vs-flip-front{z-index:2}
+.vs-flip-back{transform:rotateY(180deg);background:#f7f9fc;border:1px solid #e1e8f1;display:grid;place-items:center}
+.vs-flip-face .vs-field-wrap{height:100%;display:flex;flex-direction:column;justify-content:center}
+.vs-flip-face .vs-homer-field{max-height:206px}
+.vs-cool-zone{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 13px;gap:6px}
+.vs-zone-label{font-size:12px;font-weight:850;color:#17395b}
+.vs-cool-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;width:min(100%,205px)}
+.vs-cool-cell{aspect-ratio:1;display:grid;place-items:center;border-radius:3px;font-size:10px;font-weight:750;font-variant-numeric:tabular-nums}
+.vs-zone-footer{display:flex;align-items:center;gap:7px;font-size:9px;color:#6b7b8d;width:min(100%,205px)}
+.vs-zone-gradient{flex:1;height:6px;border-radius:9px;background:linear-gradient(90deg,#e6eef9,#b2c9df,#739cba,#3d7395,#145677)}
+.vs-zone-disclaimer{font-size:9px;color:#748496;text-align:center}
+@media(prefers-reduced-motion:reduce){.vs-flip-card{transition:none}}
+@media(max-width:600px){.vs-flip-card{min-height:226px}.vs-flip-heading{flex-wrap:wrap}.vs-cool-grid{width:min(100%,185px)}}
+
+/* Team details and rank-change chart share a top and bottom alignment. */
+@media(min-width:1001px){
+ .standings-container.is-expanded{align-items:stretch}
+ .standings-container.is-expanded .rank-list{display:flex;flex-direction:column;min-width:0}
+ .standings-container.is-expanded .rank-row{flex-shrink:0}
+ .standings-container.is-expanded .rank-expanded{flex:1;min-width:0}
+ .standings-container.is-expanded .chart-panel{margin-top:var(--rank-detail-offset,59px);min-height:0;display:flex;flex-direction:column;min-width:0}
+ .standings-container.is-expanded .chart-panel .season-rank-summary{margin-top:auto}
+}
+@media(max-width:1000px){
+ .standings-container.is-expanded .chart-panel{margin-top:0!important}
+}
 </style>
 </head>
 <body>
@@ -434,11 +470,20 @@ TEAMS.forEach((t,idx)=>{for(const role of ['hitter','pitcher']){for(let i=0;i<9;
 }}});
 // Example of searched-only unrecorded player; never shown in default club listings.
 PLAYERS.push({id:999,team:'KIA',name:'미출전 선수 (예시)',number:'--',role:'hitter',position:'내야수',had2026:false,age:20});
-const state={vsPitchView:{},vsPitchTypes:{},rankView:'monthly',rankDailyMonth:8,vsSelected:{},seasonTab:'regular',page:'standings',team:localStorage.getItem('kbo-myteam')||'',activeTeam:'',detailRole:'overall',metric:'hr',detailPlayer:null,showArea:false,month:'전체',rankMonth:'전체',vsTeams:['KIA','삼성'],vsMode:'all',vsRole:'all',matchOrder:'desc',openMatch:null,search:'',club:'',role:'all',sort:'',position:'all',cardCols:Number(localStorage.getItem('kbo-cols')||3),showAll:false,collapsed:new Set(),flipped:null,selectedPlayer:null,pitchSelected:new Set(PITCHES.map(p=>p.id)),pitchView:'top',selectedBall:null,searchSnapshot:null};
+const state={vsHeatFlip:{},vsPitchView:{},vsPitchTypes:{},rankView:'monthly',rankDailyMonth:8,vsSelected:{},seasonTab:'regular',page:'standings',team:localStorage.getItem('kbo-myteam')||'',activeTeam:'',detailRole:'overall',metric:'hr',detailPlayer:null,showArea:false,month:'전체',rankMonth:'전체',vsTeams:['KIA','삼성'],vsMode:'all',vsRole:'all',matchOrder:'desc',openMatch:null,search:'',club:'',role:'all',sort:'',position:'all',cardCols:Number(localStorage.getItem('kbo-cols')||3),showAll:false,collapsed:new Set(),flipped:null,selectedPlayer:null,pitchSelected:new Set(PITCHES.map(p=>p.id)),pitchView:'top',selectedBall:null,searchSnapshot:null};
 if(![3,4].includes(state.cardCols))state.cardCols=3;
 const $=id=>document.getElementById(id);
 function flashNotice(text){const n=$('notice');n.innerHTML=`<strong>${text}</strong>`;setTimeout(()=>{n.innerHTML='<strong>시연용 초안</strong> · 순위·수치·선수명·홈런 좌표는 임시 데이터입니다. 실제 2026 공식 기록 미연결.'},2800)}
-function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():state.page==='learn'?learnGamePage():playerDetailPage();wire();if(state.page==='learn')wireLearnGame();}
+function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():state.page==='learn'?learnGamePage():playerDetailPage();wire();if(state.page==='learn')wireLearnGame();if(state.page==='standings')alignSeasonPanels();}
+function alignSeasonPanels(){
+ const wrapper=document.querySelector('.standings-container.is-expanded');
+ if(!wrapper)return;
+ const rank=wrapper.querySelector('.rank-list'),expanded=wrapper.querySelector('.rank-expanded'),chart=wrapper.querySelector('.chart-panel');
+ if(!rank||!expanded||!chart)return;
+ // Measure actual row heights rather than assuming a fixed height.
+ const offset=Array.from(rank.children).filter(el=>el.classList.contains('rank-row')).reduce((sum,el)=>sum+el.getBoundingClientRect().height,0);
+ chart.style.setProperty('--rank-detail-offset',`${offset}px`);
+}
 function goto(page){state.page=page;render();window.scrollTo({top:0,behavior:'smooth'})}
 function jumpToTerm(term){
  const season={승률:'wpct',득점:'runs',실점:'allowed',안타:'hits',홈런:'hr',평균자책점:'era'};
@@ -548,6 +593,22 @@ const VS_PITCHES=[
  {id:'sweeper',name:'스위퍼',color:'#e58a32',avg:130},
  {id:'change',name:'체인지업',color:'#279789',avg:127}
 ];
+
+function vsCoolHitZone(p){
+ // Mock visualization only: not connected to actual batted-ball tracking.
+ const cells=Array.from({length:25},(_,i)=>{
+   const v=(hash(`${p.id}:cool:${i}`)%270+110)/1000;
+   const shade=Math.max(0,Math.min(1,(v-.11)/.27));
+   const r=Math.round(230-82*shade),g=Math.round(238-145*shade),b=Math.round(250-117*shade);
+   return `<div class="vs-cool-cell" style="background:rgb(${r},${g},${b});color:${shade>.62?'#fff':'#244463'}" title="시연용 타율 ${v.toFixed(3)}">${v.toFixed(3).replace(/^0/,'')}</div>`;
+ }).join('');
+ return `<div class="vs-cool-zone" role="img" aria-label="${safe(p.name)} 시연용 쿨히트존, 5×5 구역별 예시 타율">
+   <div class="vs-zone-label">구역별 타율</div>
+   <div class="vs-cool-grid">${cells}</div>
+   <div class="vs-zone-footer"><span>낮음</span><span class="vs-zone-gradient"></span><span>높음</span></div>
+   <div class="vs-zone-disclaimer">시연용 구역별 수치 · 실제 타구 데이터 미연결</div>
+ </div>`;
+}
 function vsHomeRunField(p){
  const balls=sampleHomeRuns(p).slice(0,Math.min(20,p.hr));
  const directions={좌측:-39,좌중간:-20,중앙:0,우중간:20,우측:39};
@@ -558,7 +619,7 @@ function vsHomeRunField(p){
   const x=220+Math.cos(theta)*r+jitter,y=278+Math.sin(theta)*r+jitter/2;
   return `<g class="vs-homer-marker" style="--ball-delay:${Math.min(i*.14,2.3)}s" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="9" fill="#fff" stroke="#c93245" stroke-width="1.8"/><path d="M-6 -4 Q-2 0 -6 4 M6 -4 Q2 0 6 4" stroke="#c93245" stroke-width="1" fill="none"/><text text-anchor="middle" dy="3" font-size="8" font-weight="800" fill="#223d5a">${b.num}</text><title>${b.num}호 홈런 · ${b.dir} · ${b.d}m · 예시</title></g>`;
  }).join('');
- return `<div class="vs-field-wrap"><div class="vs-visual-heading">홈런 분포 <span class="tiny muted">방향·비거리 예시</span></div><svg class="vs-homer-field" viewBox="0 0 440 300" role="img" aria-label="${safe(p.name)} 홈런공 순차 표시 시연"><path d="M220 278 L20 95 Q220 -68 420 95 Z" fill="#d6e8d4" stroke="#93b7a1" stroke-width="2"/><path d="M220 278 L44 110 Q220 -18 396 110 Z" fill="#9dce9e"/><path d="M220 278 L124 185 Q220 133 316 185 Z" fill="#d6b99a"/><path d="M220 278 L204 261 L220 246 L236 261 Z" fill="#faf9f5" stroke="#927f6e"/><path d="M220 278 L20 95 M220 278 L420 95" stroke="#fff" stroke-width="2" opacity=".8"/><text x="220" y="292" font-size="10" fill="#58735e" text-anchor="middle">홈플레이트</text>${markers}</svg></div>`;
+ return `<div class="vs-flip-panel"><div class="vs-visual-heading vs-flip-heading"><span>홈런 분포 / 쿨히트존</span><button type="button" class="vs-flip-toggle" data-vs-flip="${p.team}" aria-label="홈런 분포와 쿨히트존 전환" aria-pressed="${Boolean(state.vsHeatFlip[p.team])}">↻ ${state.vsHeatFlip[p.team]?"홈런 분포 보기":"쿨히트존 보기"}</button></div><div class="vs-flip-perspective"><div class="vs-flip-card ${state.vsHeatFlip[p.team]?"flipped":""}"><div class="vs-flip-face vs-flip-front"><div class="vs-field-wrap"><div class="vs-visual-heading">홈런 분포 <span class="tiny muted">방향·비거리 예시</span></div><svg class="vs-homer-field" viewBox="0 0 440 300" role="img" aria-label="${safe(p.name)} 홈런공 순차 표시 시연"><path d="M220 278 L20 95 Q220 -68 420 95 Z" fill="#d6e8d4" stroke="#93b7a1" stroke-width="2"/><path d="M220 278 L44 110 Q220 -18 396 110 Z" fill="#9dce9e"/><path d="M220 278 L124 185 Q220 133 316 185 Z" fill="#d6b99a"/><path d="M220 278 L204 261 L220 246 L236 261 Z" fill="#faf9f5" stroke="#927f6e"/><path d="M220 278 L20 95 M220 278 L420 95" stroke="#fff" stroke-width="2" opacity=".8"/><text x="220" y="292" font-size="10" fill="#58735e" text-anchor="middle">홈플레이트</text>${markers}</svg></div></div><div class="vs-flip-face vs-flip-back">${vsCoolHitZone(p)}</div></div></div></div>`;
 }
 function vsPitchPaths(p){
  const view=state.vsPitchView[p.team]||'side';
@@ -638,7 +699,8 @@ function playerDetailPage(){
 function wire(){
  document.querySelectorAll('[data-rank-view]').forEach(b=>b.onclick=()=>{state.rankView=b.dataset.rankView;render()});
  if($('rankDailyMonth'))$('rankDailyMonth').onchange=e=>{state.rankDailyMonth=Number(e.target.value);render()};
- document.querySelectorAll('[data-vs-player]').forEach(b=>b.onclick=()=>{state.vsSelected[b.dataset.vsClub]=Number(b.dataset.vsPlayer);render()});
+ document.querySelectorAll('[data-vs-player]').forEach(b=>b.onclick=()=>{state.vsSelected[b.dataset.vsClub]=Number(b.dataset.vsPlayer);state.vsHeatFlip[b.dataset.vsClub]=false;render()});
+ document.querySelectorAll('[data-vs-flip]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsFlip;state.vsHeatFlip[club]=!state.vsHeatFlip[club];const panel=b.closest('.vs-flip-panel');const card=panel?.querySelector('.vs-flip-card');if(card){card.classList.toggle('flipped',state.vsHeatFlip[club]);b.textContent=state.vsHeatFlip[club]?'↻ 홈런 분포 보기':'↻ 쿨히트존 보기';b.setAttribute('aria-pressed',String(state.vsHeatFlip[club]));}});
  document.querySelectorAll('[data-vs-view]').forEach(b=>b.onclick=()=>{state.vsPitchView[b.dataset.vsClub]=b.dataset.vsView;render()});
  document.querySelectorAll('[data-vs-pitch]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsClub;const current=state.vsPitchTypes[club]||VS_PITCHES.map(x=>x.id);const id=b.dataset.vsPitch;state.vsPitchTypes[club]=current.includes(id)?current.filter(x=>x!==id):[...current,id];render()});
  document.querySelectorAll('[data-peer-player]').forEach(b=>b.onclick=()=>{state.selectedPlayer=Number(b.dataset.peerPlayer);state.pitchSelected=new Set(PITCHES.map(p=>p.id));state.selectedBall=null;render()});
