@@ -375,6 +375,67 @@ body{background:#f5f7fb}
 .vs-feature-metrics.eight strong{font-size:clamp(12px,1.2vw,17px);overflow-wrap:anywhere}
 .vs-feature-demo{font-size:10px;color:#8b96a5;margin-top:3px;text-align:right}
 @media(max-width:650px){.vs-feature-metrics.eight{grid-template-columns:repeat(2,minmax(0,1fr))}.vs-pitch-all{margin-left:auto}}
+
+/* 도감형 경량 UX: 기록과 화면 구조는 유지, 열람 여부만 추가 */
+.dex-progress-bar{background:#fff;border-bottom:1px solid #e7edf4;color:#20344f;position:relative;z-index:25}
+.dex-progress-inner{max-width:1280px;margin:0 auto;padding:9px 28px;display:flex;align-items:center;gap:21px;flex-wrap:wrap}
+.dex-intro-label{display:flex;gap:7px;align-items:center;white-space:nowrap}
+.dex-book-icon{display:grid;place-items:center;width:24px;height:24px;background:#f0f5fa;border:1px solid #d6e0eb;border-radius:7px;color:#294b70;font-size:17px}
+.dex-intro-label strong{font-size:12px}.dex-caption{font-size:11px;color:#8593a5}
+.dex-stat{display:flex;align-items:baseline;gap:7px;color:#78879a;font-size:11px}
+.dex-stat strong{color:#1d3958;font-size:12px;font-variant-numeric:tabular-nums}
+.dex-list-toggle{margin-left:auto;background:#fff;border:1px solid #dbe3ed;border-radius:8px;color:#3c5876;font-weight:700;font-size:11px;padding:6px 10px}
+.dex-list-toggle:hover{background:#f5f8fc}
+.dex-collection{max-width:1224px;margin:0 auto;padding:12px 0 18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;border-top:1px solid #edf1f5}
+.dex-collection[hidden]{display:none}
+.dex-collection>div{border:1px solid #e6ebf2;background:#fafbfd;border-radius:10px;padding:13px}
+.dex-collection strong{font-size:12px}.dex-collection small{font-weight:500;color:#7a8c9f}
+.dex-chip-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.dex-chip{border:1px solid #dce5ef;border-radius:50px;background:white;padding:4px 7px;font-size:10px;color:#405874}
+.dex-empty{font-size:11px;color:#9ba9b6}
+.dex-inline-no{font-size:10px;font-weight:800;letter-spacing:.03em;color:#94a1b0;flex-shrink:0}
+.dex-visited{font-size:10px;font-weight:750;border-radius:6px;padding:3px 6px;background:#eaf4ed;color:#367254;white-space:nowrap}
+.dex-card-number{position:absolute;z-index:3;top:12px;left:12px;font-size:12px;color:#fff;font-weight:850;background:rgba(17,42,71,.80);padding:3px 7px;border-radius:5px}
+.dex-card-seen{position:absolute;z-index:3;top:12px;right:45px;color:#fff;background:#1c7256;padding:3px 7px;font-weight:750;font-size:10px;border-radius:5px}
+.dex-detail-no{font-size:11px;color:#67809b;font-weight:850;letter-spacing:.07em;margin-bottom:6px}
+@media(max-width:760px){.dex-progress-inner{padding:8px 15px;gap:9px 14px}.dex-caption{display:none}.dex-collection{grid-template-columns:1fr;padding:12px 15px}.dex-inline-no{display:none}.dex-visited{font-size:9px}.dex-list-toggle{font-size:10px}}
+
+/* 야린이 도감: turn-based umpire and unlocked team play */
+.global-term-search[hidden]{display:none!important}
+.gm-landing{text-align:center;padding:42px 22px;display:flex;flex-direction:column;align-items:center;gap:17px}
+.gm-title{font-size:clamp(24px,4vw,39px);font-weight:900;color:var(--navy)}
+.gm-landing p{color:#64748b;font-size:14px}
+.gm-matchup{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:16px;font-weight:800}
+.gm-matchup b{color:#8090a2}
+.baseball-scoreboard{background:#142841;color:#edf4ff;border-radius:13px;padding:15px 18px;margin:16px 0;overflow:hidden}
+.game-score-scroll{overflow-x:auto}
+.baseball-scoreboard table{border-collapse:collapse;font-size:11px;white-space:nowrap;width:100%}
+.baseball-scoreboard th,.baseball-scoreboard td{padding:7px 9px;border-bottom:1px solid #ffffff18;text-align:center;font-variant-numeric:tabular-nums}
+.baseball-scoreboard thead th{color:#abc2d7;font-size:11px}
+.baseball-scoreboard th.g-team-name{text-align:left;min-width:130px}
+.baseball-scoreboard .g-run{font-size:17px;font-weight:900;color:#fff}
+.game-score-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:11px;font-size:11px;color:#d3e2ef}
+.game-score-meta strong{font-size:14px;color:#fff}
+.gm-main{overflow:hidden}
+.gm-crowd{display:flex;align-items:center;gap:12px;min-height:65px;background:#edf4fb;padding:12px 17px;flex-wrap:wrap}
+.gm-crowd>span:first-child{font-size:12px;font-weight:800;white-space:nowrap;color:#586b7e}
+.gm-bubble{position:relative;background:white;border:1px solid #dbe5ef;border-radius:20px;padding:9px 13px;font-size:13px;color:#213a53;font-weight:750;flex:1;min-width:180px}
+.gm-shout-picker{display:flex;gap:9px;padding:10px 16px;background:#f3f7fc}
+.gm-shout-picker select{min-width:0;flex:1;padding:9px;border:1px solid #dbe3ed;border-radius:8px;background:white}
+.game-arena{padding:15px 16px;background:#edf3f8}
+.game-arena svg{display:block;max-height:350px;min-height:160px}
+.gm-game-ui{padding:22px 25px 25px}
+.gm-game-ui h2{font-size:24px;color:#142b48;letter-spacing:-.04em;margin:8px 0}
+.gm-game-ui p{font-size:13px;color:#576b7e;line-height:1.6}
+.gm-options{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}
+.gm-options .btn{min-width:115px}
+.gm-feedback{background:#f0f6fb;padding:13px;margin:14px 0;color:#243f60;border-radius:9px;font-size:13px}
+.gm-tiny{font-size:11px!important;color:#97a4b2!important}
+.gm-log{border-top:1px solid #e4e9f0;padding:11px 23px;color:#62758b;font-size:12px}
+.gm-log summary{cursor:pointer;font-weight:700}
+.gm-log div{margin:7px 0}
+.gm-unlock{display:block;color:#245e98;font-size:26px;margin:19px}
+@media(max-width:650px){.baseball-scoreboard{padding:12px}.baseball-scoreboard th,.baseball-scoreboard td{padding:6px 8px}.gm-game-ui{padding:17px}.gm-game-ui h2{font-size:20px}.gm-crowd{gap:7px;padding:10px}.gm-crowd .gm-bubble{flex-basis:100%;min-width:0}.gm-options .btn{flex:1;min-width:105px}}
 </style>
 </head>
 <body>
@@ -394,11 +455,20 @@ body{background:#f5f7fb}
   <div id="globalTermResults" class="global-term-results" hidden aria-live="polite"></div>
  </div>
 </section>
+<section class="dex-progress-bar" aria-label="내 야린이 도감">
+ <div class="dex-progress-inner"><div class="dex-intro-label"><span class="dex-book-icon" aria-hidden="true">▤</span><strong>내 도감</strong><span class="dex-caption">열람한 항목</span></div>
+ <div class="dex-stat"><span>구단</span><strong id="dexTeamCount">0 / 10</strong></div>
+ <div class="dex-stat"><span>선수</span><strong id="dexPlayerCount">0 / 180</strong></div>
+ <div class="dex-stat"><span>용어</span><strong id="dexTermCount">0 / 0</strong></div>
+ <button type="button" class="dex-list-toggle" id="dexListToggle" aria-expanded="false" aria-controls="dexCollection">열람 목록 보기 <span aria-hidden="true">⌄</span></button>
+ </div>
+ <div id="dexCollection" class="dex-collection" hidden></div>
+</section>
 <div id="buildVersion" class="build-version">구조 점검 v4 · 2026.11.26</div>
 <div id="notice" class="demo-bar"><strong>시연용 초안</strong> · 순위·수치·선수명·홈런 좌표는 임시 데이터입니다. 실제 2026 공식 기록 미연결.</div>
 <main id="app"></main>
 <button id="toTop" class="to-top" aria-label="맨 위로 이동">↑</button>
-<footer class="footer"><div>사이트명 (교체 전) <span>· 2026 KBO 시각화 수업 발표용 초안</span></div><div class="footer-right">자료 출처: <a href="https://www.koreabaseball.com/" target="_blank" rel="noopener noreferrer">KBO 공식 기록실</a> (연결 예정) · 임시 시연 데이터 자체 생성<br>선수 사진·캐릭터·사이트명 <strong>(교체 전)</strong> · 인트로 이미지 사용자 제공</div></footer>
+<footer class="footer"><div>야린이 도감(가제) <span>· 2026 KBO 시각화 수업 발표용 초안</span></div><div class="footer-right">자료 출처: <a href="https://www.koreabaseball.com/" target="_blank" rel="noopener noreferrer">KBO 공식 기록실</a> (연결 예정) · 임시 시연 데이터 자체 생성<br>선수 사진·캐릭터·사이트명 <strong>(교체 전)</strong> · 인트로 이미지 사용자 제공</div></footer>
 <div id="modalRoot"></div>
 <script>window.addEventListener("error",function(e){var x=document.getElementById("app");if(x&&!x.textContent.trim()){x.innerHTML="<div style=\"margin:35px auto;max-width:680px;padding:24px;border:1px solid #d14d5b;border-radius:12px;background:#fff\"><h2>화면 실행 오류</h2><p>사이트 파일에 오류가 발생했어요. index.html을 다시 업로드하고 새로고침해주세요.</p></div>";}console.error("KBO preview",e.message)});</script>
 <script>
@@ -495,7 +565,7 @@ function initGlobalGlossary(){
   if(!active)return;
   panel.innerHTML=matches.length?`<div class="global-result-label">${query?'검색 결과':'자주 찾는 용어'} · ${matches.length}개</div>${matches.map(([name,desc])=>{
    const guide=termGuide(name,desc),arrow=TERM_DIRECTION[name]||'';
-   return `<article class="global-guide-card"><div class="global-guide-head"><b>${esc(name)}</b><span class="global-guide-type">${esc(guide.type)}</span></div>
+   return `<article class="global-guide-card"><div class="global-guide-head"><b>${esc(name)}</b>${typeof dexSeen==='function'&&dexSeen('terms',name)?'<span class="dex-visited">✓ 열람</span>':''}<span class="global-guide-type">${esc(guide.type)}</span></div>
     <p class="global-guide-meaning">${esc(guide.meaning)}</p>
     ${arrow?`<div class="global-guide-direction">${esc(arrow.replace('좋음','유리'))}</div>`:''}
     ${guide.example?`<div class="global-guide-example">${esc(guide.example)}</div>`:''}
@@ -503,7 +573,7 @@ function initGlobalGlossary(){
    </article>`;
   }).join('')}`:'<div class="global-empty">일치하는 용어 없음 · 다른 검색어 입력</div>';
  }
- panel.addEventListener('click',e=>{const b=e.target.closest('[data-term-jump]');if(!b)return;active=false;update();jumpToTerm(b.dataset.termJump);});
+ panel.addEventListener('click',e=>{const b=e.target.closest('[data-term-jump]');if(!b)return;active=false;update();dexMark('terms',b.dataset.termJump);jumpToTerm(b.dataset.termJump);});
  inp.addEventListener('focus',()=>{active=true;update()});
  inp.addEventListener('input',()=>{active=true;update()});
  inp.addEventListener('keydown',e=>{if(e.key==='Escape'){active=false;update();inp.blur()}});
@@ -526,13 +596,219 @@ const BELL_QUESTIONS=[
 ];
 const learnState={mode:'umpire',step:0,balls:0,strikes:0,outs:0,runs:0,bases:[false,false,false],correct:0,answered:null,bellStep:0,bellCorrect:0,bellAnswered:null,termQuery:''};
 function learnReset(){Object.assign(learnState,{step:0,balls:0,strikes:0,outs:0,runs:0,bases:[false,false,false],correct:0,answered:null,bellStep:0,bellCorrect:0,bellAnswered:null});}
-function learnGamePage(){return `<div class="head-row"><h1 class="page-title">GAME⚾️</h1><span class="tag">연습 경기 · 시연용</span></div><div class="learn-tabs"><button class="learn-tab ${learnState.mode==='umpire'?'active':''}" data-learn-mode="umpire">⚖ 심판이 되어보기</button><button class="learn-tab ${learnState.mode==='bell'?'active':''}" data-learn-mode="bell">🔔 야구용어 골든벨</button></div>${learnState.mode==='umpire'?umpirePage():bellPage()}<div class="learn-glossary surface"><div class="learn-glossary-head"><h2>야구 용어 찾기</h2><span class="tiny muted">기록 · 규칙</span></div><input id="learnSearch" class="search-input" placeholder="모르는 기록이나 야구 용어 검색" value="${safe(learnState.termQuery)}" aria-label="야구 용어 검색"><div class="learn-terms" id="learnTerms">${renderLearnTerms()}</div></div>`}
+/* Original, fictional baseball game modes for 야린이 도감. */
+const CROWD_CHANTS=[
+'하나 둘 셋, 마!!!','떽! 앞으로 던져라!!!','아야! 아야! 날 새겄다!','뭐꼬! 뭐꼬! 뭐꼬!','뭐여! 뭐여! 뭐하는겨! 뭐하잔겨!',
+'확! 확! 확! 확확확!','왓! 왓! 왓! 왓왓왓!','쫌! 쫌! 쪼쫌쫌!','야! 야! 야! 야!','뭐야! 뭐야! 뭐야!',
+'우째도 가을에 야구하네!','야 이 식빵 진짜 달다!','오늘 지면 같이 죽자!','주자 살인도 살인이다!',
+'공을 네모 안에 넣어!','야구 개막하라 했지 개 막하라 했냐!','해체해라!!!','사랑한다!!!',
+'삑삑이즈 화이팅!!','오목눈이즈 이겨라!!','삼진을 당한건 넌데 왜 항상 내가 힘드냐!!!',
+'내가 악성팬이 아니고 너네가 악성 야구선수다!','응원한다!','힘내!!','다치지 마!!','오늘도 화이팅!!',
+'너거가 응원해라! 우리가 야구하께!','너거가 프로가?!','야구 그만보겠습니다!!! "그"만 보겠습니다!!',
+'확률 모르겠고 우승해!!','나 힘들다고 진짜!!','끝까지 응원할게!','감독 나와!!',
+'감독 비겁하게 덕아웃에 있지 말고 나와서 좀 쳐!!','고마운줄 알면 보답해!','사랑한다면 증거를 보여줘!',
+'이게 프로야구야?','야구선수는 안타치는 직업 아니야?','김도영 힘차게 날려라'
+];
+const GAME_TEAMS=[{name:'서울 삑삑이즈',color:'#bd3247',badge:'🐥'},{name:'과학 오목눈이즈',color:'#275e9b',badge:'🐦'}];
+const PITCH_CLASSES=['포심','투심','싱커','커터','슬라이더','스위퍼','커브','슬러브','체인지업','스플리터','너클볼'];
+const GM=(arr)=>arr[Math.floor(Math.random()*arr.length)];
+const gr=(n)=>Math.random()<n;
+let umpGame=null;
+let gameAudienceBubble='';
+let gameShoutOpen=false;
+let hiddenUnlocked=localStorage.getItem('kbo-umpire-hidden')==='yes';
+let hiddenTeam=0;
+function freshMatch(hidden=false){
+ return {mode:hidden?'hidden':'umpire',started:true,ended:false,inning:1,half:0,outs:0,balls:0,strikes:0,bases:[false,false,false],scores:[Array(11).fill(null),Array(11).fill(null)],errors:0,calls:0,decision:null,feedback:null,log:[],count:0,skip:0,phase:'intro',last:'경기 시작',pitchClock:18,fan:'',choice:'',discovery:null};
+}
+function currentAttack(g){return g.half===0?0:1}
+function runs(g,n){const a=currentAttack(g);g.scores[a][g.inning-1]=(g.scores[a][g.inning-1]??0)+n}
+function getTotal(g,team){return g.scores[team].reduce((s,v)=>s+(v||0),0)}
+function eventLog(g,t){g.last=t;g.log.unshift(`${g.inning}회 ${g.half?'말':'초'} · ${t}`);g.log=g.log.slice(0,12)}
+function runnersAdvance(g,kind){
+ const b=g.bases;
+ if(kind==='walk'){
+  if(b[0]&&b[1]&&b[2])runs(g,1);
+  g.bases=[true,b[0]||b[1]&&false,b[1]&&b[0]||b[2]];
+  // Force only: runners on 2B / 3B without a force stay put.
+  g.bases=[true,b[0]||b[1],b[2]||(b[1]&&b[0])];
+ }else if(kind==='single'){
+  if(b[2])runs(g,1);g.bases=[true,b[0],b[1]];
+ }else if(kind==='double'){
+  if(b[2])runs(g,1);if(b[1])runs(g,1);g.bases=[false,true,b[0]];
+ }else if(kind==='triple'){
+  runs(g,b.filter(Boolean).length);g.bases=[false,false,true];
+ }else if(kind==='homer'){
+  runs(g,1+b.filter(Boolean).length);g.bases=[false,false,false];
+ }else if(kind==='ground'){
+  if(b[2]&&g.outs<=2){runs(g,1);b[2]=false}
+  g.bases=[false,b[0],b[1]];
+ }
+}
+function endHalf(g){
+ g.balls=0;g.strikes=0;g.bases=[false,false,false];g.outs=0;g.decision=null;g.feedback=null;
+ // Home team ahead after 8.5 innings or later: bottom half is unnecessary.
+ if(g.half===0 && g.inning>=9 && getTotal(g,1)>getTotal(g,0)){finishMatch(g);return}
+ if(g.half===1){
+  if(g.inning>=9 && getTotal(g,1)!==getTotal(g,0)){finishMatch(g);return}
+  if(g.inning>=11){finishMatch(g);return}
+  g.inning++;g.half=0;
+ }else g.half=1;
+ g.phase='intro';eventLog(g,`${g.inning}회 ${g.half?'말':'초'} · 공수교대`);
+}
+function finishMatch(g){
+ g.ended=true;g.phase='end';g.decision=null;
+ if(g.mode==='umpire'&&g.errors<=5){hiddenUnlocked=true;localStorage.setItem('kbo-umpire-hidden','yes')}
+}
+function applyBatterOutcome(g,kind){
+ g.count++;g.balls=0;g.strikes=0;
+ if(kind==='out'){g.outs++;eventLog(g,'타자 아웃')}
+ else if(kind==='doubleplay'&&g.bases[0]){g.outs=Math.min(3,g.outs+2);g.bases[0]=false;eventLog(g,'병살타')}
+ else if(kind==='fly'){g.outs++;eventLog(g,'외야 플라이 아웃')}
+ else if(kind==='strikeout'){g.outs++;eventLog(g,'삼진 아웃')}
+ else if(kind==='walk'){runnersAdvance(g,'walk');eventLog(g,'볼넷 출루')}
+ else{runnersAdvance(g,kind);eventLog(g,({single:'안타',double:'2루타',triple:'3루타',homer:'홈런'})[kind]||'타격')}
+ if(g.inning>=9&&g.half===1&&getTotal(g,1)>getTotal(g,0)){eventLog(g,'끝내기 득점');finishMatch(g);return}
+ if(g.outs>=3)endHalf(g);
+}
+function autoPlayOne(g){
+ let kind;
+ const r=Math.random();
+ if(r<.26)kind='out';else if(r<.41)kind='strikeout';else if(r<.54)kind='fly';else if(r<.66)kind='walk';else if(r<.83)kind='single';else if(r<.91)kind='double';else if(r<.965)kind='homer';else kind='triple';
+ if(kind==='out'&&g.bases[0]&&g.outs<2&&gr(.16))kind='doubleplay';
+ applyBatterOutcome(g,kind);
+}
+function createDecision(g){
+ const scenarios=['pitch','pitch','pitch','safe','foul','steal','clock','check','pickoff'];
+ let type=GM(scenarios);
+ if(!g.bases.some(Boolean) && ['steal','pickoff'].includes(type))type='pitch';
+ const strike=gr(.52),pitch=GM(PITCH_CLASSES);
+ const baseLabel=g.bases[0]?'2루':g.bases[1]?'3루':'홈';
+ const options={
+  pitch:{title:`${pitch} 투구`,desc:strike?'공이 ABS 스트라이크존을 통과':'공이 ABS 스트라이크존 바깥을 통과',options:['스트라이크','볼'],answer:strike?'스트라이크':'볼',why:strike?'ABS존 통과: 스트라이크':'ABS존 바깥 통과: 볼',xy:strike?[48,53]:[83,27]},
+  safe:{title:'1루 접전',desc:'주자의 발과 공이 도착한 순간을 확인',options:['세이프','아웃'],answer:gr(.5)?'세이프':'아웃',why:'베이스 도착과 포구 시점을 비교',xy:[50,50]},
+  foul:{title:'파울 라인 부근 타구',desc:'타구가 선 안쪽인지 바깥쪽인지 확인',options:['페어','파울'],answer:gr(.5)?'페어':'파울',why:'파울 라인은 페어 지역에 포함',xy:[50,50]},
+  steal:{title:`${baseLabel} 도루`,desc:'주자의 베이스 터치와 수비수의 태그 시점을 확인',options:['세이프','아웃'],answer:gr(.5)?'세이프':'아웃',why:'베이스 도착과 태그 시점 비교',xy:[50,50]},
+  clock:{title:'피치클락 판정',desc:'투수가 제한 시간을 넘겨 투구를 시작',options:['볼 추가','스트라이크 추가'],answer:'볼 추가',why:'투수 피치클락 위반: 볼 부과',xy:[50,50]},
+  check:{title:'체크 스윙',desc:'타자의 배트가 스윙으로 인정되는지 확인',options:['스윙','노스윙'],answer:gr(.5)?'스윙':'노스윙',why:'타자의 실제 스윙 여부 판단',xy:[50,50]},
+  pickoff:{title:'견제 동작',desc:'투수가 정상적인 견제 동작을 했는지 확인',options:['보크','정상 견제'],answer:gr(.03)?'보크':'정상 견제',why:'보크일 경우 주자에게 진루권 부여',xy:[50,50]}
+ };
+ const e={...options[type],type};
+ // Use answer-specific visible evidence: never randomize a correct answer without corresponding cue.
+ if(type==='safe'||type==='steal')e.desc=e.answer==='세이프'?'주자가 공을 가진 수비수의 태그보다 먼저 베이스에 도달':'주자보다 수비수의 공과 태그가 먼저 도달';
+ if(type==='foul')e.desc=e.answer==='페어'?'타구가 파울 라인 위에 닿음':'타구가 파울 라인 바깥에 닿음';
+ if(type==='check')e.desc=e.answer==='스윙'?'배트가 타격 동작으로 앞으로 회전':'타자가 배트를 멈추고 스윙하지 않음';
+ if(type==='pickoff')e.desc=e.answer==='보크'?'투수가 투구 동작을 시작한 뒤 중단':'투수가 규정에 맞게 주자에게 견제 송구';
+ return e;
+}
+function resolveDecision(g,e){
+ if(e.type==='pitch'){
+  if(e.answer==='스트라이크'){g.strikes++;if(g.strikes>=3)applyBatterOutcome(g,'strikeout')}
+  else{g.balls++;if(g.balls>=4)applyBatterOutcome(g,'walk')}
+ }else if(e.type==='clock'){g.balls++;if(g.balls>=4)applyBatterOutcome(g,'walk')}
+ else if(e.type==='check'&&e.answer==='스윙'){g.strikes++;if(g.strikes>=3)applyBatterOutcome(g,'strikeout')}
+ else if(e.type==='safe'||e.type==='steal'){
+  if(e.type==='steal'){
+   const i=g.bases.findIndex(Boolean);
+   if(i>=0){g.bases[i]=false;if(e.answer==='아웃')g.outs++;else if(i===2)runs(g,1);else g.bases[i+1]=true;}
+  }else if(e.answer==='아웃')g.outs++;else runnersAdvance(g,'single');
+  if(g.outs>=3)endHalf(g);
+ }else if(e.type==='pickoff'&&e.answer==='보크'){
+  if(g.bases[2])runs(g,1);
+  g.bases=[false,g.bases[0],g.bases[1]];
+ }
+ eventLog(g,e.title+' · '+e.answer);
+}
+function prepareGameTurn(g,fast=false){
+ if(g.ended||g.decision)return;
+ if(g.phase==='intro'){g.phase='play';return;}
+ if(fast){
+  const init=g.inning*2+g.half;
+  let max=160;
+  while(!g.ended&&g.inning*2+g.half===init&&max-->0)autoPlayOne(g);
+  eventLog(g,'이닝 빨리감기 완료');
+  return;
+ }
+ if(g.mode==='hidden')return;
+ // Most action is automated. Important calls occur at controlled frequency.
+ let attempts=0;
+ do {autoPlayOne(g);attempts++}while(!g.ended&&g.phase!=='intro'&&g.outs<3&&attempts<2&&gr(.7));
+ if(!g.ended&&g.phase==='play'&&gr(.82)){g.decision=createDecision(g);g.pitchClock=g.bases.some(Boolean)?23:18;}
+}
+function recordAudience(g){
+ if(!g)return;
+ if(gr(.38)){g.fan=GM(CROWD_CHANTS);if(g.fan==='하나 둘 셋, 마!!!'&&gr(.1))g.fan+='  산!';}
+}
+function gameScoreboard(g){
+ const upto=g.inning>9?11:9;
+ const cells=Array.from({length:upto},(_,i)=>`<th>${i+1}</th>`).join('');
+ return `<div class="baseball-scoreboard"><div class="game-score-scroll"><table><thead><tr><th>TEAM</th>${cells}<th>R</th></tr></thead><tbody>${GAME_TEAMS.map((t,i)=>`<tr><th class="g-team-name" style="color:${t.color}">${t.badge} ${t.name}</th>${Array.from({length:upto},(_,j)=>`<td>${g.scores[i][j]===null?'·':g.scores[i][j]}</td>`).join('')}<td class="g-run">${getTotal(g,i)}</td></tr>`).join('')}</tbody></table></div><div class="game-score-meta"><strong>${g.inning}회 ${g.half?'말 ▼':'초 ▲'}</strong><span>B ${g.balls} · S ${g.strikes} · O ${g.outs}</span><span>피치클락 ${g.bases.some(Boolean)?23:18}초</span>${g.mode==='umpire'?`<span>오심 ${g.errors}회</span>`:''}<span>주자 ${g.bases.map((v,i)=>v?`${i+1}루`:'').filter(Boolean).join('·')||'없음'}</span></div></div>`;
+}
+function graphicBallpark(g){
+ const e=g.decision;
+ return `<div class="game-arena" role="img" aria-label="심판 게임 야구장. ${e?e.desc:'경기 진행 상황'}"><svg viewBox="0 0 540 290" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fieldGradient" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#204c42"/><stop offset="1" stop-color="#347f62"/></linearGradient></defs><rect width="540" height="290" rx="14" fill="url(#fieldGradient)"/><path d="M270 269L68 126 270 11 472 126Z" fill="#aa7955" stroke="#fff" stroke-width="2"/><path d="M270 261L160 157 270 70 380 157Z" fill="#236d50"/><path d="M270 261L270 70M270 261L160 157M270 261L380 157" stroke="white" stroke-width="1.5"/><g fill="white">${[[270,261],[380,157],[270,70],[160,157]].map(([x,y])=>`<rect x="${x-5}" y="${y-5}" width="10" height="10" transform="rotate(45 ${x} ${y})"/>`).join('')}</g><circle cx="270" cy="152" r="13" fill="#275e9b" stroke="#fff" stroke-width="2"/><text x="270" y="156" text-anchor="middle" fill="#fff" font-size="11">P</text>${g.bases.map((v,i)=>v?`<circle cx="${[380,270,160][i]}" cy="${[145,58,145][i]}" r="9" fill="#e5bf65" stroke="#fff" stroke-width="2"/>`:'').join('')}<rect x="232" y="184" width="76" height="70" rx="4" stroke="#fff" stroke-width="2" fill="#eff7ff" fill-opacity=".12"/><path d="M190 232L205 215L205 260" stroke="#d64d55" stroke-width="6" stroke-linecap="round"/><circle cx="192" cy="219" r="11" fill="#d64d55"/><path d="M343 238L335 214L335 260" stroke="#1a3960" stroke-width="6" stroke-linecap="round"/><circle cx="343" cy="209" r="11" fill="#1a3960"/>${e&&e.type==='pitch'?`<circle cx="${232+e.xy[0]*.76}" cy="${184+e.xy[1]*.7}" r="9" fill="#fff" stroke="#c6374b" stroke-width="2"/>`:''}<text x="16" y="24" fill="#fff" font-size="12">${e?'판정 상황':'경기 진행 중'}</text></svg></div>`;
+}
+function umpirePage(){
+ const g=umpGame;
+ if(!g)return `<section class="learn-game surface gm-landing"><div class="gm-title">⚖️ 오늘은 내가 심판!</div><p>9이닝 경기 · 주요 판정만 직접 진행 · 오심 5회 이하 달성 시 ?? 해금</p><div class="gm-matchup"><span>🐥 서울 삑삑이즈</span><b>VS</b><span>🐦 과학 오목눈이즈</span></div><button id="gameStart" class="btn primary">GAME START</button>${hiddenUnlocked?'<button class="btn" id="hiddenTeamStart">?? 해금 · 직접 플레이</button>':''}</section>`;
+ if(g.mode==='hidden')return hiddenModePage();
+ const score=gameScoreboard(g);
+ if(g.ended)return `${score}<div class="learn-game surface learn-finish"><h2>경기 종료</h2><p>${GAME_TEAMS[0].name} ${getTotal(g,0)} : ${getTotal(g,1)} ${GAME_TEAMS[1].name}</p><p>총 오심 ${g.errors}회 · 판정 ${g.calls}회</p>${g.errors<=5?'<strong class="gm-unlock">?? 해금</strong><p>직접 공격·수비 모드 사용 가능</p><button id="hiddenTeamStart" class="btn primary">해금된 모드 시작</button>':''}<button class="btn" id="gameStart">다시 경기하기</button></div>`;
+ return `${score}<section class="learn-game surface gm-main"><div class="gm-crowd"><span>📣 관중석</span><span class="gm-bubble">${safe(g.fan||'오늘도 화이팅!!')}</span><button class="btn sm" id="shoutToggle">직접 외치기</button></div>${gameShoutOpen?`<div class="gm-shout-picker"><select id="shoutList" aria-label="외칠 응원 문구">${CROWD_CHANTS.map((v,i)=>`<option value="${i}">${safe(v)}</option>`).join('')}</select><button class="btn primary sm" id="shoutSend">외치기</button></div>`:''}${graphicBallpark(g)}<div class="gm-game-ui"><span class="learn-kicker">${g.phase==='intro'?`${g.inning}회 ${g.half?'말':'초'} · 공수교대`:g.decision?'판정 요청':'경기 진행 중'}</span><h2>${g.decision?g.decision.title:g.phase==='intro'?`${g.inning}회 ${g.half?'말 ▼':'초 ▲'}`:g.last}</h2><p>${g.decision?g.decision.desc:'선수들이 경기 진행 중. 일반 플레이는 자동 처리'}</p>${g.decision?`<div class="gm-options">${g.decision.options.map(v=>`<button class="btn ${g.feedback?'':'primary'}" data-gm-call="${safe(v)}" ${g.feedback?'disabled':''}>${safe(v)}</button>`).join('')}</div>${g.feedback?`<div class="gm-feedback">${g.feedback.correct?'정확한 판정':'정답: '+g.decision.answer} · ${safe(g.decision.why)}</div><button class="btn primary" id="gameContinue">다음 상황</button>`:''}`:`<div class="gm-options"><button class="btn primary" id="gameContinue">${g.phase==='intro'?'경기 진행':'다음 플레이'}</button><button class="btn" id="gameFastForward">이닝 빨리감기 »</button></div>`}<p class="gm-tiny">빨리감기 중 생략된 판정은 오심으로 계산하지 않음</p></div><details class="gm-log"><summary>최근 경기 기록</summary>${g.log.map(v=>`<div>${safe(v)}</div>`).join('')}</details></section>`;
+}
+function hiddenModePage(){
+ const g=umpGame;
+ if(g.ended)return `${gameScoreboard(g)}<section class="surface learn-finish"><h2>경기 종료</h2><p>${GAME_TEAMS[0].name} ${getTotal(g,0)} : ${getTotal(g,1)} ${GAME_TEAMS[1].name}</p><button class="btn" id="hiddenTeamStart">다시 플레이</button><button class="btn" id="gameResetMenu">메뉴로</button></section>`;
+ const myTurn=currentAttack(g)===hiddenTeam;
+ return `${gameScoreboard(g)}<section class="surface gm-main"><div class="gm-crowd"><span>📣 관중석</span><span class="gm-bubble">${safe(g.fan||'끝까지 응원할게!')}</span><button class="btn sm" id="shoutToggle">직접 외치기</button></div>${gameShoutOpen?`<div class="gm-shout-picker"><select id="shoutList">${CROWD_CHANTS.map((v,i)=>`<option value="${i}">${safe(v)}</option>`).join('')}</select><button class="btn primary sm" id="shoutSend">외치기</button></div>`:''}${graphicBallpark(g)}<div class="gm-game-ui"><h2>${g.phase==='intro'?`${g.inning}회 ${g.half?'말 ▼':'초 ▲'}`:`${myTurn?'공격':'수비'} 전략 선택`}</h2><p>${safe(g.last)} · ${GAME_TEAMS[hiddenTeam].name}</p><div class="gm-options">${g.phase==='intro'?'<button class="btn primary" id="hiddenContinue">다음 이닝 시작</button>':(myTurn?['안타 노리기','장타 노리기','번트 시도']:['직구 승부','변화구 승부','수비 집중']).map((v,i)=>`<button class="btn" data-hidden-act="${i}">${v}</button>`).join('')}<button class="btn" id="gameFastForward">이닝 빨리감기 »</button></div><p class="gm-tiny">선택한 전략에 따라 해당 공격 차례의 타구 결과 확률이 달라지는 간략 시뮬레이션</p></div></section>`;
+}
+function startUmpMatch(hidden=false){gameShoutOpen=false;umpGame=freshMatch(hidden);recordAudience(umpGame);render();}
+function gameContinue(){const g=umpGame;if(!g||g.ended)return;if(g.feedback){g.feedback=null;g.decision=null;}prepareGameTurn(g);recordAudience(g);render();}
+function hiddenAction(idx){
+ const g=umpGame;if(!g||g.ended)return;
+ // Strategy affects the first plate appearance; remaining at-bats are simulated normally.
+ const offense=currentAttack(g)===hiddenTeam;
+ if(offense){
+  if(idx===0)applyBatterOutcome(g,gr(.46)?'single':'out');
+  else if(idx===1)applyBatterOutcome(g,gr(.20)?'homer':gr(.25)?'double':'out');
+  else if(idx===2){if(g.bases.some(Boolean)&&g.outs<2){g.outs++;g.bases=[false,g.bases[0],g.bases[1]];eventLog(g,'희생번트')}else applyBatterOutcome(g,'out')}
+ }else{
+  if(idx===0)applyBatterOutcome(g,gr(.48)?'strikeout':'single');
+  else if(idx===1)applyBatterOutcome(g,gr(.55)?'out':'walk');
+  else applyBatterOutcome(g,gr(.72)?'out':'single');
+ }
+ if(!g.ended&&g.phase!=='intro'&&g.outs<3&&gr(.55))autoPlayOne(g);
+ recordAudience(g);render();
+}
+function wireUmpGame(){
+ document.querySelectorAll('[data-learn-mode]').forEach(b=>b.onclick=()=>{learnState.mode=b.dataset.learnMode;render()});
+ if($('gameStart'))$('gameStart').onclick=()=>startUmpMatch(false);
+ if($('gameResetMenu'))$('gameResetMenu').onclick=()=>{umpGame=null;render()};
+ if($('gameContinue'))$('gameContinue').onclick=gameContinue;
+ if($('gameFastForward'))$('gameFastForward').onclick=()=>{prepareGameTurn(umpGame,true);recordAudience(umpGame);render()};
+ if($('hiddenTeamStart'))$('hiddenTeamStart').onclick=()=>{umpGame=null;learnState.mode='umpire';document.getElementById('app').innerHTML=learnGamePage().replace('GAME START','GAME START');
+  const modal=document.getElementById('modalRoot');modal.innerHTML=`<div class="modal-overlay"><div class="modal-card" style="padding:26px;max-width:480px"><h2>?? 해금 · 팀 선택</h2><p>직접 공격·수비 모드</p><div class="gm-options"><button class="btn" data-hidden-team="0">🐥 서울 삑삑이즈</button><button class="btn" data-hidden-team="1">🐦 과학 오목눈이즈</button></div><button class="btn" id="hiddenCancel">닫기</button></div></div>`;
+  modal.querySelectorAll('[data-hidden-team]').forEach(b=>b.onclick=()=>{hiddenTeam=Number(b.dataset.hiddenTeam);modal.innerHTML='';startUmpMatch(true)});modal.querySelector('#hiddenCancel').onclick=()=>{modal.innerHTML='';render()};
+ };
+ if($('hiddenContinue'))$('hiddenContinue').onclick=()=>{umpGame.phase='play';render()};
+ document.querySelectorAll('[data-hidden-act]').forEach(b=>b.onclick=()=>hiddenAction(Number(b.dataset.hiddenAct)));
+ document.querySelectorAll('[data-gm-call]').forEach(b=>b.onclick=()=>{const g=umpGame;if(!g||g.feedback)return;const correct=b.dataset.gmCall===g.decision.answer;g.calls++;if(!correct)g.errors++;const e=g.decision;g.feedback={correct};resolveDecision(g,e);recordAudience(g);render()});
+ if($('shoutToggle'))$('shoutToggle').onclick=()=>{gameShoutOpen=!gameShoutOpen;render()};
+ if($('shoutSend'))$('shoutSend').onclick=()=>{const i=Number($('shoutList').value);umpGame.fan=CROWD_CHANTS[i];gameShoutOpen=false;render()};
+ document.querySelectorAll('[data-bell-answer]').forEach(b=>b.onclick=()=>{if(learnState.bellAnswered)return;const correct=Number(b.dataset.bellAnswer)===BELL_QUESTIONS[learnState.bellStep].answer;if(correct)learnState.bellCorrect++;learnState.bellAnswered={correct};render()});
+ if($('bellNext'))$('bellNext').onclick=()=>{learnState.bellStep++;learnState.bellAnswered=null;render()};
+ if($('bellRestart'))$('bellRestart').onclick=()=>{learnState.bellStep=0;learnState.bellCorrect=0;learnState.bellAnswered=null;render()};
+ document.querySelectorAll('[data-bell-term]').forEach(b=>b.onclick=()=>{learnState.termQuery=b.dataset.bellTerm;dexMark('terms',b.dataset.bellTerm);render();});
+}
+
+function learnGamePage(){return `<div class="head-row"><h1 class="page-title">GAME⚾️</h1><span class="tag">시연용 가상 경기</span></div><div class="learn-tabs"><button class="learn-tab ${learnState.mode==='umpire'?'active':''}" data-learn-mode="umpire">⚖ 오늘은 내가 심판!</button><button class="learn-tab ${learnState.mode==='bell'?'active':''}" data-learn-mode="bell">🔔 야구용어 골든벨</button></div>${learnState.mode==='umpire'?umpirePage():bellPage()}`;}
+
 function renderLearnTerms(){const q=learnState.termQuery.trim().toLowerCase();if(!q)return `<div class="muted small">용어를 입력하면 짧은 설명이 나와.</div>`;const match=SEARCH_TERMS.filter(([name,desc])=>`${name} ${desc}`.toLowerCase().includes(q));return match.length?match.slice(0,9).map(([n,d])=>`<div class="learn-term"><b>${safe(n)}${TERM_DIRECTION[n]?`<small class="learn-direction">${safe(TERM_DIRECTION[n])}</small>`:""}</b><span>${safe(d)}</span></div>`).join(''):'<div class="muted small">일치하는 용어가 없어.</div>'}
-function umpirePage(){const done=learnState.outs>=3||learnState.step>=UMPIRE_EVENTS.length;const e=UMPIRE_EVENTS[learnState.step];return `<section class="learn-game surface"><div class="learn-scorebar"><span class="learn-inning">1회 초 <small>연습 경기</small></span><span><strong>${learnState.runs}</strong> 점</span><span>B ${learnState.balls} · S ${learnState.strikes} · O ${learnState.outs}</span><span>정답 ${learnState.correct}</span></div>${done?`<div class="learn-finish"><div class="learn-finish-icon">⚾</div><h2>3아웃, 이닝 종료!</h2><p>${learnState.step}번의 판정 중 ${learnState.correct}번 정답</p><button class="btn primary" id="learnRestart">다시 심판 보기</button></div>`:`<div class="learn-layout"><div class="learn-field"><div class="learn-field-head">PLAY ${learnState.step+1} <span>판정 대기</span></div><svg viewBox="0 0 400 310" role="img" aria-label="야구장 상황 그림"><defs><radialGradient id="grass"><stop stop-color="#34775f"/><stop offset="1" stop-color="#174737"/></radialGradient></defs><rect width="400" height="310" rx="14" fill="url(#grass)"/><path d="M200 266 L78 145 L200 29 L322 145 Z" fill="#a97859" stroke="#f5f1df" stroke-width="3"/><path d="M200 266 L145 206 L200 153 L255 206 Z" fill="#2c6b50" stroke="#eee" stroke-width="1"/><g fill="#fff" stroke="#e5e9ed">${[[200,266],[78,145],[200,29],[322,145]].map(([x,y])=>`<rect x="${x-5}" y="${y-5}" width="10" height="10" transform="rotate(45 ${x} ${y})"/>`).join('')}</g>${learnState.bases.map((b,i)=>b?`<circle cx="${[322,200,78][i]}" cy="${[130,15,130][i]}" r="7" fill="#f8c557" stroke="#fff" stroke-width="2"/>`:'').join('')}<circle cx="200" cy="152" r="11" fill="#22364d"/><text x="200" y="157" text-anchor="middle" fill="white" font-size="10">P</text>${e.kind==='pitch'?`<rect x="174" y="199" width="52" height="54" fill="#d7eaff" fill-opacity=".2" stroke="#d7eaff" stroke-dasharray="5 4" stroke-width="2"/><circle cx="${174+e.x*.52}" cy="${199+e.y*.54}" r="8" fill="white" stroke="#c6404f" stroke-width="2"/>`:`<path d="M200 256 Q${e.kind==='foul'?345:260} 170 ${e.kind==='foul'?390:275} ${e.kind==='foul'?95:75}" fill="none" stroke="#fff" stroke-dasharray="5 7" stroke-width="3"/><circle cx="${e.kind==='foul'?388:275}" cy="${e.kind==='foul'?95:75}" r="7" fill="white"/>`}</svg><div class="learn-bases"><span>◆ 1루 ${learnState.bases[0]?'주자':'비어 있음'}</span><span>◆ 2루 ${learnState.bases[1]?'주자':'비어 있음'}</span><span>◆ 3루 ${learnState.bases[2]?'주자':'비어 있음'}</span></div></div><div class="learn-decision"><span class="learn-kicker">상황 ${learnState.step+1}</span><h2>${e.title}</h2><p>${e.desc}</p><div class="learn-options">${(e.kind==='pitch'?['스트라이크','볼']:e.kind==='foul'?['파울','페어']:['아웃','세이프']).map(v=>`<button class="learn-option" data-umpire-answer="${v}" ${learnState.answered?'disabled':''}>${v}</button>`).join('')}</div>${learnState.answered?`<div class="learn-feedback ${learnState.answered.correct?'good':'wrong'}"><strong>${learnState.answered.correct?'정답!':'아쉽지만 정답은 '+e.answer}</strong><div>${e.why}</div></div><button class="btn primary learn-next" id="learnNext">다음 상황 →</button>`:'<div class="learn-helper">판정을 선택하면 실제 규칙과 이유를 알려줘.</div>'}</div></div>`}</section>`}
+
 function advanceRunners(kind){const s=learnState;if(kind==='walk'){if(s.bases[0]&&s.bases[1]&&s.bases[2])s.runs++;s.bases[2]=s.bases[2]||(s.bases[0]&&s.bases[1]);s.bases[1]=s.bases[1]||s.bases[0];s.bases[0]=true;}else if(kind==='single'){if(s.bases[2])s.runs++;s.bases=[true,s.bases[0],s.bases[1]];}}
 function applyUmpireEvent(e){const s=learnState;if(e.kind==='pitch'){if(e.answer==='볼'){s.balls++;if(s.balls===4){advanceRunners('walk');s.balls=0;s.strikes=0}}else{s.strikes++;if(s.strikes===3){s.outs++;s.balls=0;s.strikes=0}}}else if(e.kind==='foul'){s.strikes=Math.min(2,s.strikes+1)}else if(e.play==='safe'){advanceRunners('single');s.balls=0;s.strikes=0;}else if(e.play==='tag'){s.outs++;s.bases[0]=false;s.balls=0;s.strikes=0;}else if(e.play==='fly'){s.outs++;s.balls=0;s.strikes=0;} }
 function bellPage(){const done=learnState.bellStep>=BELL_QUESTIONS.length;const item=BELL_QUESTIONS[learnState.bellStep];return `<section class="learn-game surface learn-bell"><div class="learn-scorebar"><span class="learn-inning">야구용어 골든벨</span><span>${Math.min(learnState.bellStep+1,BELL_QUESTIONS.length)} / ${BELL_QUESTIONS.length}</span><span>정답 ${learnState.bellCorrect}</span></div>${done?`<div class="learn-finish"><div class="learn-finish-icon">🔔</div><h2>골든벨 완료!</h2><p>총 ${BELL_QUESTIONS.length}문제 중 ${learnState.bellCorrect}문제를 맞혔어.</p><button class="btn primary" id="bellRestart">다시 도전</button></div>`:`<div class="learn-bell-inner"><div class="learn-bell-mark">🔔</div><span class="learn-kicker">QUESTION ${learnState.bellStep+1} · ${item.term}</span><h2>${item.q}</h2><div class="learn-bell-options">${item.options.map((v,i)=>`<button class="learn-option" data-bell-answer="${i}" ${learnState.bellAnswered?'disabled':''}>${v}</button>`).join('')}</div>${learnState.bellAnswered?`<div class="learn-feedback ${learnState.bellAnswered.correct?'good':'wrong'}"><strong>${learnState.bellAnswered.correct?'정답!':'정답: '+item.options[item.answer]}</strong><div>${item.why}</div><button class="learn-term-jump" data-bell-term="${item.term}">용어 검색에서 보기 ↗</button></div><button id="bellNext" class="btn primary learn-next">다음 문제 →</button>`:''}</div>`}</section>`}
-function wireLearnGame(){document.querySelectorAll('[data-learn-mode]').forEach(b=>b.onclick=()=>{learnState.mode=b.dataset.learnMode;render()});document.querySelectorAll('[data-umpire-answer]').forEach(b=>b.onclick=()=>{if(learnState.answered)return;const answer=b.dataset.umpireAnswer;const e=UMPIRE_EVENTS[learnState.step];const correct=answer===e.answer;if(correct)learnState.correct++;learnState.answered={correct};applyUmpireEvent(e);render()});if($('learnNext'))$('learnNext').onclick=()=>{learnState.step++;learnState.answered=null;render()};if($('learnRestart'))$('learnRestart').onclick=()=>{learnReset();render()};document.querySelectorAll('[data-bell-answer]').forEach(b=>b.onclick=()=>{if(learnState.bellAnswered)return;const correct=Number(b.dataset.bellAnswer)===BELL_QUESTIONS[learnState.bellStep].answer;if(correct)learnState.bellCorrect++;learnState.bellAnswered={correct};render()});if($('bellNext'))$('bellNext').onclick=()=>{learnState.bellStep++;learnState.bellAnswered=null;render()};if($('bellRestart'))$('bellRestart').onclick=()=>{learnState.bellStep=0;learnState.bellCorrect=0;learnState.bellAnswered=null;render()};document.querySelectorAll('[data-bell-term]').forEach(b=>b.onclick=()=>{learnState.termQuery=b.dataset.bellTerm;render();const input=$('learnSearch');input?.scrollIntoView({behavior:'smooth',block:'center'});input?.focus();});if($('learnSearch'))$('learnSearch').oninput=e=>{learnState.termQuery=e.target.value;$('learnTerms').innerHTML=renderLearnTerms()}}
+function wireLearnGame(){wireUmpGame();}
 
 </script>
 <script>
@@ -580,11 +856,35 @@ TEAMS.forEach((t,idx)=>{for(const role of ['hitter','pitcher']){for(let i=0;i<9;
 }}});
 // Example of searched-only unrecorded player; never shown in default club listings.
 PLAYERS.push({id:999,team:'KIA',name:'미출전 선수 (예시)',number:'--',role:'hitter',position:'내야수',had2026:false,age:20});
+/* 야린이 도감: 기존 콘텐츠의 열람 이력. 브라우저 로컬에만 저장. */
+const DEX_KEY='yarini-collection-v1';
+const DEX_DATA=(()=>{try{const x=JSON.parse(localStorage.getItem(DEX_KEY)||'{}');return {teams:Array.isArray(x.teams)?x.teams:[],players:Array.isArray(x.players)?x.players:[],terms:Array.isArray(x.terms)?x.terms:[]};}catch{return {teams:[],players:[],terms:[]}}})();
+function dexSeen(group,id){return DEX_DATA[group].includes(String(id))}
+function dexMark(group,id){
+ if(!['teams','players','terms'].includes(group))return;
+ const value=String(id);
+ if(!DEX_DATA[group].includes(value)){DEX_DATA[group].push(value);try{localStorage.setItem(DEX_KEY,JSON.stringify(DEX_DATA))}catch{}}
+ dexUpdate();
+}
+function dexUpdate(){
+ const teamCount=document.getElementById('dexTeamCount'),playerCount=document.getElementById('dexPlayerCount'),termCount=document.getElementById('dexTermCount');
+ if(!teamCount)return;
+ const validTeams=DEX_DATA.teams.filter(x=>!!TEAM_MAP[x]);
+ const validPlayers=DEX_DATA.players.filter(x=>PLAYERS.some(p=>p.had2026&&String(p.id)===x));
+ const validTerms=DEX_DATA.terms.filter(x=>SEARCH_TERMS.some(([t])=>t===x));
+ teamCount.textContent=`${validTeams.length} / ${TEAMS.length}`;
+ playerCount.textContent=`${validPlayers.length} / ${PLAYERS.filter(p=>p.had2026).length}`;
+ termCount.textContent=`${validTerms.length} / ${SEARCH_TERMS.length}`;
+ const list=document.getElementById('dexCollection');
+ if(list&& !list.hidden){const short=(arr)=>arr.length?arr.slice(-16).map(x=>`<span class="dex-chip">${safe(x)}</span>`).join(''):'<span class="dex-empty">열람 항목 없음</span>';
+ list.innerHTML=`<div><strong>구단 도감 <small>${validTeams.length}개</small></strong><div class="dex-chip-list">${short(validTeams.map(x=>TEAM_MAP[x].name))}</div></div><div><strong>선수 도감 <small>${validPlayers.length}명</small></strong><div class="dex-chip-list">${short(validPlayers.map(x=>PLAYERS.find(p=>String(p.id)===x)?.name||x))}</div></div><div><strong>기록·용어 도감 <small>${validTerms.length}개</small></strong><div class="dex-chip-list">${short(validTerms)}</div></div>`;}
+}
+function dexInit(){const toggle=document.getElementById('dexListToggle'),list=document.getElementById('dexCollection');if(!toggle||!list)return;toggle.addEventListener('click',()=>{list.hidden=!list.hidden;toggle.setAttribute('aria-expanded',String(!list.hidden));toggle.innerHTML=list.hidden?'열람 목록 보기 <span aria-hidden="true">⌄</span>':'열람 목록 닫기 <span aria-hidden="true">⌃</span>';dexUpdate();});dexUpdate()}
 const state={vsHeatFlip:{},vsPitchView:{},vsPitchTypes:{},rankView:'monthly',rankDailyMonth:8,vsSelected:{},seasonTab:'regular',page:'standings',team:localStorage.getItem('kbo-myteam')||'',activeTeam:'',detailRole:'overall',metric:'hr',detailPlayer:null,showArea:false,month:'전체',rankMonth:'전체',vsTeams:['KIA','삼성'],vsMode:'all',vsRole:'all',matchOrder:'desc',openMatch:null,search:'',club:'',role:'all',sort:'',position:'all',cardCols:Number(localStorage.getItem('kbo-cols')||3),showAll:false,collapsed:new Set(),flipped:null,selectedPlayer:null,pitchSelected:new Set(PITCHES.map(p=>p.id)),pitchView:'top',selectedBall:null,searchSnapshot:null};
 if(![3,4].includes(state.cardCols))state.cardCols=3;
 const $=id=>document.getElementById(id);
 function flashNotice(text){const n=$('notice');n.innerHTML=`<strong>${text}</strong>`;setTimeout(()=>{n.innerHTML='<strong>시연용 초안</strong> · 순위·수치·선수명·홈런 좌표는 임시 데이터입니다. 실제 2026 공식 기록 미연결.'},2800)}
-function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():state.page==='learn'?learnGamePage():playerDetailPage();wire();if(state.page==='learn')wireLearnGame();if(state.page==='standings')alignSeasonPanels();}
+function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page||(state.page==='playerdetail'&&b.dataset.page==='players')));const t=TEAM_MAP[state.team];$('myTeamSymbol').innerHTML=t?logo(t,'sm'):'＋';document.querySelector('.global-term-search').hidden=state.page==='learn';$('app').innerHTML=state.page==='standings'?standingsPage():state.page==='versus'?vsPage():state.page==='players'?playersPage():state.page==='learn'?learnGamePage():playerDetailPage();wire();if(state.page==='learn')wireLearnGame();if(state.page==='standings')alignSeasonPanels();dexUpdate();}
 function alignSeasonPanels(){
  const wrapper=document.querySelector('.standings-container.is-expanded');
  if(!wrapper)return;
@@ -688,7 +988,7 @@ function standingsPage(){
  const active=state.activeTeam?TEAM_MAP[state.activeTeam]:null;
  const right=`<div class="surface chart-panel"><div class="head-row"><h2 class="section-title">${active?active.name+' · ':''}시즌 순위 변화</h2><span class="tag">시연용 데이터</span></div><div class="rank-chart-controls"><button class="pill ${state.rankView==='monthly'?'active':''}" data-rank-view="monthly">월말 순위</button><button class="pill ${state.rankView==='daily'?'active':''}" data-rank-view="daily">월별 상세</button>${state.rankView==='daily'?`<select class="select" id="rankDailyMonth" aria-label="상세 순위 월 선택">${[3,4,5,6,7,8,9].map(m=>`<option value="${m}" ${state.rankDailyMonth===m?'selected':''}>${m}월</option>`).join('')}</select>`:''}</div>${standingLine()}<div class="chart-legend">${(active?[active]:TEAMS).map(t=>`<span class="legend-item" style="--c:${t.color}"><span class="legend-dot"></span>${t.id}</span>`).join('')}${state.rankView==='daily'?'<span class="legend-item"><span class="rank-no-game"></span>경기 없는 날(예시) · 회색 점선</span>':''}</div>${state.rankView==='daily'&&active?monthMetricPanel(active,state.rankDailyMonth):''}${active?`<div class="season-rank-summary" style="${styleTeam(active)}"><div class="sum-tile"><span class="label">선택 구단</span><strong>${active.name}</strong></div><div class="sum-tile"><span class="label">시즌 승률 · 시연용</span><strong>${fmt('wpct',TEAM_STATS[active.id].wpct)}</strong></div><div class="sum-tile"><span class="label">팀 홈런 · 시연용</span><strong>${TEAM_STATS[active.id].hr}</strong></div><div class="sum-tile"><span class="label">팀 평균자책점 · 시연용</span><strong>${fmt('era',TEAM_STATS[active.id].era)}</strong></div></div>`:''}</div>`;
  const selectedIdx=TEAMS.findIndex(t=>t.id===state.activeTeam);
- const rankRow=(t)=>{const r=TEAM_STATS[t.id];return `<button class="rank-row ${state.team===t.id?'my-row':''} ${state.activeTeam===t.id?'selected':''}" style="${styleTeam(t)}" data-open-team="${t.id}" aria-expanded="${state.activeTeam===t.id}"><span class="rank-no">${r.rank}</span>${logo(t)}<span class="rank-name">${t.name}</span><span class="rank-chevron">${state.activeTeam===t.id?'⌃':'⌄'}</span></button>${state.activeTeam===t.id?`<div class="rank-expanded"><div class="expand-inner">${teamDetail(t)}</div></div>`:''}`};
+ const rankRow=(t)=>{const r=TEAM_STATS[t.id];return `<button class="rank-row ${state.team===t.id?'my-row':''} ${state.activeTeam===t.id?'selected':''}" style="${styleTeam(t)}" data-open-team="${t.id}" aria-expanded="${state.activeTeam===t.id}"><span class="rank-no">${r.rank}</span>${logo(t)}<span class="dex-inline-no">No.${String(r.rank).padStart(3,'0')}</span><span class="rank-name">${t.name}</span>${dexSeen('teams',t.id)?'<span class="dex-visited">열람 완료 ✓</span>':''}<span class="rank-chevron">${state.activeTeam===t.id?'⌃':'⌄'}</span></button>${state.activeTeam===t.id?`<div class="rank-expanded"><div class="expand-inner">${teamDetail(t)}</div></div>`:''}`};
  const topRows=(selectedIdx>=0?TEAMS.slice(0,selectedIdx+1):TEAMS).map(rankRow).join('');
  // 상세보다 아래에 오는 구단 이름 행은 전체 화면 너비로 확장해 오른쪽 공백을 제거.
  const bottomRows=selectedIdx>=0?TEAMS.slice(selectedIdx+1).map(rankRow).join(''):'';
@@ -857,7 +1157,7 @@ function playerCard(p,ix){
  const t=TEAM_MAP[p.team],metrics=RELEVANT[state.sort]&&p[state.sort]!==undefined?RELEVANT[state.sort]:(p.role==='hitter'?['avg','hits','hr']:['era','k','whip']);
  const ranking=state.sort&&ix!==undefined&&ix<3?ix+1:null,unavailable=!p.had2026;
  return `<div class="flip-card ${state.flipped===p.id?'flipped':''}" style="${styleTeam(t)}" data-card="${p.id}" tabindex="0" role="button" aria-label="${safe(p.name)} 카드 뒤집기"><div class="flip-inner">
- <div class="flip-face front"><div class="flip-photo"><span class="silhouette">👤</span><span class="team-badge">${logo(t,'sm')}</span>${ranking?`<span class="rank-tag">${ranking}위</span>`:''}<span class="turn-hint">⟳</span></div><div class="flip-info"><div class="person-title">${safe(p.name)} <span class="tag">${p.number}</span></div><div class="person-sub">${p.position}</div>${unavailable?'<div class="note-box" style="margin-top:15px">2026시즌 1군 기록 없음</div>':`<div class="flip-stats">${metrics.map(k=>`<div class="flip-stat"><label>${LABELS[k]}</label><b>${fmt(k,p[k])}</b></div>`).join('')}</div>`}</div></div>
+ <div class="flip-face front"><div class="flip-photo"><span class="silhouette">👤</span><span class="team-badge">${logo(t,'sm')}</span><span class="dex-card-number">No.${String(p.id).padStart(3,'0')}</span>${dexSeen('players',p.id)?'<span class="dex-card-seen">✓ 열람</span>':''}${ranking?`<span class="rank-tag">${ranking}위</span>`:''}<span class="turn-hint">⟳</span></div><div class="flip-info"><div class="person-title">${safe(p.name)} <span class="tag">${p.number}</span></div><div class="person-sub">${p.position}</div>${unavailable?'<div class="note-box" style="margin-top:15px">2026시즌 1군 기록 없음</div>':`<div class="flip-stats">${metrics.map(k=>`<div class="flip-stat"><label>${LABELS[k]}</label><b>${fmt(k,p[k])}</b></div>`).join('')}</div>`}</div></div>
  <div class="flip-face back"><div class="back-photo">${playerActionPortrait(p)}</div><div class="back-overlay"></div><div class="back-main back-summary"><h3>${safe(p.name)} <span class="tag">${p.position}</span></h3>${unavailable?'<div class="note-box" style="margin-top:18px">2026시즌 1군 기록 없음</div>':`<div class="back-summary-stats">${metrics.slice(0,3).filter(k=>Number.isFinite(p[k])).map(k=>`<div class="back-summary-stat"><span>${LABELS[k]}</span><strong>${fmt(k,p[k])}</strong></div>`).join('')}</div><button class="detail-link" data-open-player="${p.id}">상세 기록 보기 →</button>`}</div></div>
  </div></div>`;
 }
@@ -867,7 +1167,7 @@ function playerDetailPage(){
  const t=TEAM_MAP[p.team],metrics=p.role==='hitter'?HITTER_METRICS:PITCHER_METRICS;
  const related=filteredPlayers().filter(q=>q.had2026);
  const peers=related.length>1?related:PLAYERS.filter(q=>q.had2026&&q.role===p.role&&q.team===p.team);
- return `<div class="player-fullscreen" role="dialog" aria-modal="true" aria-label="${safe(p.name)} 상세 기록" style="${styleTeam(t)}"><div class="player-fullscreen-inner"><article class="player-expanded-card"><button class="player-close" id="backToResults" aria-label="선수 상세 닫기">✕</button><div class="player-expanded-body"><div class="player-expanded-photo">${playerActionPortrait(p)}</div><div class="player-expanded-data"><div class="inline-controls"><span class="tag">2026 시즌 · 시연용</span><span class="tag">${p.position} · ${p.number}번</span></div><h1 class="hero-name">${safe(p.name)}</h1><div class="muted">${t.name}</div><div class="player-expanded-stats"><div class="stat-card-caption">6개 주요 지표 · 동일 포지션 평균 비교 (시연용)</div>${statBars(p,p.role==='hitter'?CARD_HITTER_KEYS:CARD_PITCHER_KEYS,true)}<div class="stat-legend"><i></i> 평균선 = 동일 포지션 선수의 시연 데이터 평균</div></div><div class="player-expanded-visual"><h2 class="section-title">${p.role==='hitter'?'타구 기록':'투구 기록'}</h2>${featurePlayer(p)}</div></div></div></article><aside class="player-peers"><div class="player-peers-heading"><strong>다른 선수</strong><span class="tiny muted">스크롤·스와이프하여 선택</span></div><div class="player-peer-list">${peers.map(q=>`<button class="player-peer ${q.id===p.id?'on':''}" data-peer-player="${q.id}" style="${styleTeam(TEAM_MAP[q.team])}"><span class="player-peer-icon">${q.role==='pitcher'?'⚾':'◉'}</span><span><b>${safe(q.name)}</b><small>${TEAM_MAP[q.team].name} · ${q.position}</small></span></button>`).join('')}</div></aside></div></div>`;
+ return `<div class="player-fullscreen" role="dialog" aria-modal="true" aria-label="${safe(p.name)} 상세 기록" style="${styleTeam(t)}"><div class="player-fullscreen-inner"><article class="player-expanded-card"><button class="player-close" id="backToResults" aria-label="선수 상세 닫기">✕</button><div class="player-expanded-body"><div class="player-expanded-photo">${playerActionPortrait(p)}</div><div class="player-expanded-data"><div class="inline-controls"><span class="tag">2026 시즌 · 시연용</span><span class="tag">${p.position} · ${p.number}번</span></div><div class="dex-detail-no">선수 도감 · No.${String(p.id).padStart(3,'0')} · 열람 완료</div><h1 class="hero-name">${safe(p.name)}</h1><div class="muted">${t.name}</div><div class="player-expanded-stats"><div class="stat-card-caption">6개 주요 지표 · 동일 포지션 평균 비교 (시연용)</div>${statBars(p,p.role==='hitter'?CARD_HITTER_KEYS:CARD_PITCHER_KEYS,true)}<div class="stat-legend"><i></i> 평균선 = 동일 포지션 선수의 시연 데이터 평균</div></div><div class="player-expanded-visual"><h2 class="section-title">${p.role==='hitter'?'타구 기록':'투구 기록'}</h2>${featurePlayer(p)}</div></div></div></article><aside class="player-peers"><div class="player-peers-heading"><strong>다른 선수</strong><span class="tiny muted">스크롤·스와이프하여 선택</span></div><div class="player-peer-list">${peers.map(q=>`<button class="player-peer ${q.id===p.id?'on':''}" data-peer-player="${q.id}" style="${styleTeam(TEAM_MAP[q.team])}"><span class="player-peer-icon">${q.role==='pitcher'?'⚾':'◉'}</span><span><b>${safe(q.name)}</b><small>${TEAM_MAP[q.team].name} · ${q.position}</small></span></button>`).join('')}</div></aside></div></div>`;
 }
 function wire(){
  document.querySelectorAll('[data-rank-view]').forEach(b=>b.onclick=()=>{state.rankView=b.dataset.rankView;render()});
@@ -882,8 +1182,8 @@ function wire(){
  document.querySelectorAll('[data-vs-view]').forEach(b=>b.onclick=()=>{state.vsPitchView[b.dataset.vsClub]=b.dataset.vsView;render()});
  document.querySelectorAll('[data-vs-pitch]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsClub;const current=state.vsPitchTypes[club]||VS_PITCHES.map(x=>x.id);const id=b.dataset.vsPitch;state.vsPitchTypes[club]=current.includes(id)?current.filter(x=>x!==id):[...current,id];render()});
  document.querySelectorAll('[data-vs-pitch-all]').forEach(b=>b.onclick=()=>{const club=b.dataset.vsPitchAll;const current=state.vsPitchTypes[club]??VS_PITCHES.map(x=>x.id);state.vsPitchTypes[club]=current.length===VS_PITCHES.length?[]:VS_PITCHES.map(x=>x.id);const y=window.scrollY;render();window.scrollTo(0,y);});
- document.querySelectorAll('[data-peer-player]').forEach(b=>b.onclick=()=>{state.selectedPlayer=Number(b.dataset.peerPlayer);state.pitchSelected=new Set(PITCHES.map(p=>p.id));state.selectedBall=null;render()});
-document.querySelectorAll('[data-season-tab]').forEach(b=>b.onclick=()=>{state.seasonTab=b.dataset.seasonTab;state.activeTeam='';render()});document.querySelectorAll('.vs-row').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('show-names')));document.querySelectorAll('[data-open-team]').forEach(b=>b.onclick=()=>{let t=b.dataset.openTeam;state.activeTeam=state.activeTeam===t?'':t;state.detailRole='overall';state.metric='wpct';state.detailPlayer=null;state.showArea=false;state.selectedBall=null;state.hitView='field';render();if(state.activeTeam){let target=document.querySelector('.rank-row.selected');if(target)target.scrollIntoView({behavior:'smooth',block:'nearest'})}});document.querySelectorAll('[data-close-team]').forEach(b=>b.onclick=()=>{state.activeTeam='';render()});document.querySelectorAll('[data-detail-role]').forEach(b=>b.onclick=()=>{state.detailRole=b.dataset.detailRole;state.metric=state.detailRole==='hitter'?'hr':'k';state.detailPlayer=null;state.hitView='field';render()});document.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{state.metric=b.dataset.metric;state.detailPlayer=null;render();document.querySelector('.metric-cell.active')?.scrollIntoView({behavior:'smooth',block:'nearest'})});document.querySelectorAll('[data-radar]').forEach(b=>b.style&&b.addEventListener('click',()=>{state.metric=b.dataset.radar;state.detailPlayer=null;render()}));document.querySelectorAll('[data-feature-player]').forEach(b=>b.onclick=()=>{state.detailPlayer=Number(b.dataset.featurePlayer);state.selectedBall=null;render()});document.querySelectorAll('[data-area-toggle]').forEach(b=>b.onclick=()=>{state.showArea=!state.showArea;render()});document.querySelectorAll('[data-area-metric]').forEach(b=>b.onclick=()=>{state.areaMetric=b.dataset.areaMetric;render()});document.querySelectorAll('[data-hit-view]').forEach(b=>b.onclick=e=>{
+ document.querySelectorAll('[data-peer-player]').forEach(b=>b.onclick=()=>{state.selectedPlayer=Number(b.dataset.peerPlayer);dexMark('players',state.selectedPlayer);state.pitchSelected=new Set(PITCHES.map(p=>p.id));state.selectedBall=null;render()});
+document.querySelectorAll('[data-season-tab]').forEach(b=>b.onclick=()=>{state.seasonTab=b.dataset.seasonTab;state.activeTeam='';render()});document.querySelectorAll('.vs-row').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('show-names')));document.querySelectorAll('[data-open-team]').forEach(b=>b.onclick=()=>{let t=b.dataset.openTeam;state.activeTeam=state.activeTeam===t?'':t;if(state.activeTeam)dexMark('teams',t);state.detailRole='overall';state.metric='wpct';state.detailPlayer=null;state.showArea=false;state.selectedBall=null;state.hitView='field';render();if(state.activeTeam){let target=document.querySelector('.rank-row.selected');if(target)target.scrollIntoView({behavior:'smooth',block:'nearest'})}});document.querySelectorAll('[data-close-team]').forEach(b=>b.onclick=()=>{state.activeTeam='';render()});document.querySelectorAll('[data-detail-role]').forEach(b=>b.onclick=()=>{state.detailRole=b.dataset.detailRole;state.metric=state.detailRole==='hitter'?'hr':'k';state.detailPlayer=null;state.hitView='field';render()});document.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>{state.metric=b.dataset.metric;state.detailPlayer=null;render();document.querySelector('.metric-cell.active')?.scrollIntoView({behavior:'smooth',block:'nearest'})});document.querySelectorAll('[data-radar]').forEach(b=>b.style&&b.addEventListener('click',()=>{state.metric=b.dataset.radar;state.detailPlayer=null;render()}));document.querySelectorAll('[data-feature-player]').forEach(b=>b.onclick=()=>{state.detailPlayer=Number(b.dataset.featurePlayer);state.selectedBall=null;render()});document.querySelectorAll('[data-area-toggle]').forEach(b=>b.onclick=()=>{state.showArea=!state.showArea;render()});document.querySelectorAll('[data-area-metric]').forEach(b=>b.onclick=()=>{state.areaMetric=b.dataset.areaMetric;render()});document.querySelectorAll('[data-hit-view]').forEach(b=>b.onclick=e=>{
   e.preventDefault();
   const scrollCard=document.querySelector('.player-expanded-card');
   const preservedCardScroll=scrollCard?scrollCard.scrollTop:null;
@@ -894,12 +1194,13 @@ document.querySelectorAll('[data-season-tab]').forEach(b=>b.onclick=()=>{state.s
   const newScrollCard=document.querySelector('.player-expanded-card');
   if(newScrollCard&&preservedCardScroll!==null&&oldFocusKey===state.selectedPlayer){newScrollCard.scrollTop=preservedCardScroll;}
   if(Math.abs(window.scrollY-oldWindowY)>2)window.scrollTo({top:oldWindowY,behavior:'instant'});
- });document.querySelectorAll('[data-ball]').forEach(b=>{const act=()=>{state.selectedBall=Number(b.dataset.ball);const p=state.page==='playerdetail'?PLAYERS.find(x=>x.id===state.selectedPlayer):teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole).find(q=>q.id===state.detailPlayer)||teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole)[0];const ball=sampleHomeRuns(p).find(x=>x.num===state.selectedBall);if(ball){$('ballTip').innerHTML=`<strong>${ball.num}호 홈런</strong><span>${ball.date}</span><span>${ball.opponent}</span><span>${ball.park}</span><span>${ball.dir}</span><span>비거리 ${ball.d}m</span><span>타구 속도 ${ball.v}km/h</span><span>발사각 ${ball.ang}°</span>`}};b.addEventListener('click',act);b.addEventListener('mouseenter',act);b.addEventListener('focus',act)});document.querySelectorAll('[data-pitch]').forEach(b=>b.onclick=()=>{const k=b.dataset.pitch;if(state.pitchSelected.has(k))state.pitchSelected.delete(k);else state.pitchSelected.add(k);render()});document.querySelectorAll('[data-pitch-view]').forEach(b=>b.onclick=()=>{state.pitchView=b.dataset.pitchView;render()});document.querySelectorAll('[data-pitch-replay]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pitch-path').forEach(p=>{p.style.animation='none';p.getBoundingClientRect();p.style.animation=''})});document.querySelectorAll('[data-vs-team]').forEach(b=>b.onclick=()=>{let k=b.dataset.vsTeam;if(state.vsTeams.includes(k))state.vsTeams=state.vsTeams.filter(x=>x!==k);else if(state.vsTeams.length<2)state.vsTeams.push(k);else state.vsTeams=[state.vsTeams[1],k];render()});if($('vsReset'))$('vsReset').onclick=()=>{state.vsTeams=[];render()};document.querySelectorAll('[data-vs-mode]').forEach(b=>b.onclick=()=>{state.vsMode=b.dataset.vsMode;render()});document.querySelectorAll('[data-vs-role]').forEach(b=>b.onclick=()=>{state.vsRole=b.dataset.vsRole;render()});document.querySelectorAll('[data-match]').forEach(b=>b.onclick=()=>{let i=Number(b.dataset.match);state.openMatch=state.openMatch===i?null:i;render()});document.querySelectorAll('[data-match-sort]').forEach(b=>b.onclick=()=>{state.matchOrder=state.matchOrder==='desc'?'asc':'desc';render()});if($('searchName')){let f=$('searchName');f.addEventListener('input',()=>{const caret=f.selectionStart;state.search=f.value;state.showAll=false;state.flipped=null;render();let n=$('searchName');n.focus();n.setSelectionRange(caret,caret)})}if($('clubFilter'))$('clubFilter').onchange=e=>{state.club=e.target.value;state.showAll=false;state.flipped=null;render()};if($('positionFilter'))$('positionFilter').onchange=e=>{state.position=e.target.value;state.showAll=false;render()};document.querySelectorAll('[data-search-role]').forEach(b=>b.onclick=()=>{state.role=b.dataset.searchRole;state.sort='';state.position='all';state.showAll=false;state.flipped=null;render()});document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{state.sort=state.sort===b.dataset.sort?'':b.dataset.sort;state.showAll=false;state.flipped=null;render()});if($('clearFilters'))$('clearFilters').onclick=()=>{state.search='';state.club='';state.role='all';state.sort='';state.position='all';state.showAll=false;state.flipped=null;state.collapsed.clear();render()};document.querySelectorAll('[data-cols]').forEach(b=>b.onclick=()=>{state.cardCols=Number(b.dataset.cols);localStorage.setItem('kbo-cols',state.cardCols);state.flipped=null;render()});document.querySelectorAll('[data-collapse]').forEach(b=>b.onclick=()=>{let k=b.dataset.collapse;if(state.collapsed.has(k))state.collapsed.delete(k);else state.collapsed.add(k);render()});if($('showAll'))$('showAll').onclick=()=>{state.showAll=!state.showAll;render()};document.querySelectorAll('[data-card]').forEach(b=>{function flip(e){if(e.target.closest('[data-open-player]'))return;state.flipped=state.flipped===Number(b.dataset.card)?null:Number(b.dataset.card);document.querySelectorAll('.flip-card').forEach(el=>el.classList.toggle('flipped',Number(el.dataset.card)===state.flipped))}b.addEventListener('click',flip);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip(e)}})});document.querySelectorAll('[data-open-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();state.selectedPlayer=Number(b.dataset.openPlayer);state.searchSnapshot={scroll:window.scrollY};goto('playerdetail')});if($('backToResults'))$('backToResults').onclick=()=>{state.page='players';render();window.scrollTo({top:state.searchSnapshot?.scroll||0,behavior:'instant'})};}
+ });document.querySelectorAll('[data-ball]').forEach(b=>{const act=()=>{state.selectedBall=Number(b.dataset.ball);const p=state.page==='playerdetail'?PLAYERS.find(x=>x.id===state.selectedPlayer):teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole).find(q=>q.id===state.detailPlayer)||teamPlayers(TEAM_MAP[state.activeTeam],state.detailRole)[0];const ball=sampleHomeRuns(p).find(x=>x.num===state.selectedBall);if(ball){$('ballTip').innerHTML=`<strong>${ball.num}호 홈런</strong><span>${ball.date}</span><span>${ball.opponent}</span><span>${ball.park}</span><span>${ball.dir}</span><span>비거리 ${ball.d}m</span><span>타구 속도 ${ball.v}km/h</span><span>발사각 ${ball.ang}°</span>`}};b.addEventListener('click',act);b.addEventListener('mouseenter',act);b.addEventListener('focus',act)});document.querySelectorAll('[data-pitch]').forEach(b=>b.onclick=()=>{const k=b.dataset.pitch;if(state.pitchSelected.has(k))state.pitchSelected.delete(k);else state.pitchSelected.add(k);render()});document.querySelectorAll('[data-pitch-view]').forEach(b=>b.onclick=()=>{state.pitchView=b.dataset.pitchView;render()});document.querySelectorAll('[data-pitch-replay]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.pitch-path').forEach(p=>{p.style.animation='none';p.getBoundingClientRect();p.style.animation=''})});document.querySelectorAll('[data-vs-team]').forEach(b=>b.onclick=()=>{let k=b.dataset.vsTeam;if(state.vsTeams.includes(k))state.vsTeams=state.vsTeams.filter(x=>x!==k);else if(state.vsTeams.length<2)state.vsTeams.push(k);else state.vsTeams=[state.vsTeams[1],k];render()});if($('vsReset'))$('vsReset').onclick=()=>{state.vsTeams=[];render()};document.querySelectorAll('[data-vs-mode]').forEach(b=>b.onclick=()=>{state.vsMode=b.dataset.vsMode;render()});document.querySelectorAll('[data-vs-role]').forEach(b=>b.onclick=()=>{state.vsRole=b.dataset.vsRole;render()});document.querySelectorAll('[data-match]').forEach(b=>b.onclick=()=>{let i=Number(b.dataset.match);state.openMatch=state.openMatch===i?null:i;render()});document.querySelectorAll('[data-match-sort]').forEach(b=>b.onclick=()=>{state.matchOrder=state.matchOrder==='desc'?'asc':'desc';render()});if($('searchName')){let f=$('searchName');f.addEventListener('input',()=>{const caret=f.selectionStart;state.search=f.value;state.showAll=false;state.flipped=null;render();let n=$('searchName');n.focus();n.setSelectionRange(caret,caret)})}if($('clubFilter'))$('clubFilter').onchange=e=>{state.club=e.target.value;state.showAll=false;state.flipped=null;render()};if($('positionFilter'))$('positionFilter').onchange=e=>{state.position=e.target.value;state.showAll=false;render()};document.querySelectorAll('[data-search-role]').forEach(b=>b.onclick=()=>{state.role=b.dataset.searchRole;state.sort='';state.position='all';state.showAll=false;state.flipped=null;render()});document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{state.sort=state.sort===b.dataset.sort?'':b.dataset.sort;state.showAll=false;state.flipped=null;render()});if($('clearFilters'))$('clearFilters').onclick=()=>{state.search='';state.club='';state.role='all';state.sort='';state.position='all';state.showAll=false;state.flipped=null;state.collapsed.clear();render()};document.querySelectorAll('[data-cols]').forEach(b=>b.onclick=()=>{state.cardCols=Number(b.dataset.cols);localStorage.setItem('kbo-cols',state.cardCols);state.flipped=null;render()});document.querySelectorAll('[data-collapse]').forEach(b=>b.onclick=()=>{let k=b.dataset.collapse;if(state.collapsed.has(k))state.collapsed.delete(k);else state.collapsed.add(k);render()});if($('showAll'))$('showAll').onclick=()=>{state.showAll=!state.showAll;render()};document.querySelectorAll('[data-card]').forEach(b=>{function flip(e){if(e.target.closest('[data-open-player]'))return;state.flipped=state.flipped===Number(b.dataset.card)?null:Number(b.dataset.card);document.querySelectorAll('.flip-card').forEach(el=>el.classList.toggle('flipped',Number(el.dataset.card)===state.flipped))}b.addEventListener('click',flip);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip(e)}})});document.querySelectorAll('[data-open-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();state.selectedPlayer=Number(b.dataset.openPlayer);dexMark('players',state.selectedPlayer);state.searchSnapshot={scroll:window.scrollY};goto('playerdetail')});if($('backToResults'))$('backToResults').onclick=()=>{state.page='players';render();window.scrollTo({top:state.searchSnapshot?.scroll||0,behavior:'instant'})};}
 document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>goto(b.dataset.page)));
 $('brandBtn').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 $('myTeamBtn').onclick=()=>openIntro(false);
 $('toTop').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 initGlobalGlossary();
+dexInit();
 render();openIntro(true); // 초안 검토 중: 새로고침 시 인트로를 항상 보여줌
 
 </script>
